@@ -23,27 +23,29 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 
-const ProductTables = () => {
+const Drivers = () => {
   return (
     <>
       <Header />
       {/* Page content */}
       <Container className="mt--7" fluid>
         {/* Table */}
-        <Row>
+      
+        <Row className="mt-5">
+
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-                <h3 className="mb-0">Products </h3>
+                <h3 className="mb-0">Drivers Details </h3>
               </CardHeader>
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                   
+                    <th scope="col">Email</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Address</th>
                     <th scope="col" />
                   </tr>
                 </thead>
@@ -66,21 +68,23 @@ const ProductTables = () => {
                         </a>
                         <Media>
                           <span className="mb-0 text-sm">
-                            Argon Design System
+                            Jane Doe
                           </span>
                         </Media>
                       </Media>
                     </th>
-                    <td>Lorem Ipsum is ...</td>
-                   
+                    <td>jane@gmail.com</td>
                     <td>
-                     500ksh
+                      <Badge color="" className="badge-dot mr-4">
+                        <i className="bg-warning" />
+                        pending
+                      </Badge>
                     </td>
+                    <td>0740902461</td>
                     <td>
                       <div className="d-flex align-items-center">
-                        <span className="mr-2">50kg</span>
-                        
-                      </div>
+                        <span className="mr-2">Nyeri</span>
+                     </div>
                     </td>
                     <td className="text-right">
                       <UncontrolledDropdown>
@@ -107,13 +111,10 @@ const ProductTables = () => {
                           >
                            Delete
                           </DropdownItem>
-                        
-                        </DropdownMenu>
+                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
                   </tr>
-                  
-                   
                  
                 
                 </tbody>
@@ -173,11 +174,9 @@ const ProductTables = () => {
             </Card>
           </div>
         </Row>
-        {/* Dark table */}
-        
       </Container>
     </>
   );
 };
 
-export default ProductTables;
+export default Drivers;

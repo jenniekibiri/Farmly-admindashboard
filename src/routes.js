@@ -5,9 +5,14 @@ import Maps from "views/examples/Maps.js";
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Icons from "views/examples/Icons.js";
-import UsersTables from "views/examples/UsersTables";
+
 import ProductTables from "views/examples/ProductTables";
 import Categories  from "views/examples/Categories";
+import Drivers from "views/examples/Drivers";
+import Buyers from "views/examples/Buyers";
+import Farmers from "views/examples/Farmers";
+
+
 var routes = [
   {
     path: "/index",
@@ -18,13 +23,6 @@ var routes = [
   },
 
   
-  {
-    path: "/users-tables",
-    name: "Users",
-    icon: "fa fa-user-friends text-red",
-    component:UsersTables ,
-    layout: "/admin",
-  },
   {
     path: "/products-tables",
     name: "Products",
@@ -38,6 +36,30 @@ var routes = [
     name: "Categories",
     icon: "ni ni-bullet-list-67 text-red",
     component: Categories,
+    layout: "/admin",
+  },
+  
+  {
+    path: "/farmers-tables",
+    name: "Farmers",
+    icon: "fa fa-user-friends text-red",
+    component:Farmers,
+    layout: "/admin",
+  },
+  
+  {
+    path: "/buyers-tables",
+    name: "Buyers",
+    icon: "fa fa-user-friends text-red",
+    component:Buyers ,
+    layout: "/admin",
+  },
+  
+  {
+    path: "/drivers-tables",
+    name: "Drivers",
+    icon: "fa fa-user-friends text-red",
+    component:Drivers ,
     layout: "/admin",
   },
   {

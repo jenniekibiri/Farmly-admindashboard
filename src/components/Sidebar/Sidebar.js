@@ -66,6 +66,7 @@ const Sidebar = (props) => {
             <i className={prop.icon} />
             {prop.name}
           </NavLink>
+     
         </NavItem>
       );
     });
