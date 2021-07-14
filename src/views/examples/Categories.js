@@ -195,20 +195,15 @@ const Categories = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
+                       
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
@@ -231,7 +226,7 @@ const Categories = () => {
                         </a>
                         <Media>
                           <span className="mb-0 text-sm">
-                            Angular Now UI Kit PRO
+                       ngular Now UI Kit PRO
                           </span>
                         </Media>
                       </Media>
@@ -360,20 +355,15 @@ const Categories = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
+                       
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
@@ -523,20 +513,15 @@ const Categories = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
+                       
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
@@ -688,20 +673,15 @@ const Categories = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
+                       
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
@@ -852,20 +832,15 @@ const Categories = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
+                       
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
