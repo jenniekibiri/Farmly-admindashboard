@@ -34,7 +34,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               target="_blank"
             >
-              Creative Tim
+            Farmly
             </a>
           </div>
         </Col>
@@ -47,7 +47,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                Creative Tim
+               Farmly
               </NavLink>
             </NavItem>
 
