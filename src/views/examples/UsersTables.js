@@ -39,11 +39,11 @@ const UsersTables = () => {
               <Table className="align-items-center table-flush" responsive>
                 <thead className="thead-light">
                   <tr>
-                    <th scope="col">Project</th>
-                    <th scope="col">Budget</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Users</th>
-                    <th scope="col">Completion</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Address</th>
                     <th scope="col" />
                   </tr>
                 </thead>
@@ -195,21 +195,15 @@ const UsersTables = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
-                        </DropdownMenu>
+                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
                   </tr>
@@ -344,6 +338,8 @@ const UsersTables = () => {
                       </div>
                     </td>
                     <td className="text-right">
+
+                  
                       <UncontrolledDropdown>
                         <DropdownToggle
                           className="btn-icon-only text-light"
@@ -360,20 +356,15 @@ const UsersTables = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                          Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
+                        
                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
@@ -523,21 +514,15 @@ const UsersTables = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
-                        </DropdownMenu>
+                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
                   </tr>
@@ -688,21 +673,15 @@ const UsersTables = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
-                        </DropdownMenu>
+                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
                   </tr>
@@ -852,21 +831,15 @@ const UsersTables = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
-                        </DropdownMenu>
+                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
                   </tr>
@@ -1097,21 +1070,15 @@ const UsersTables = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
-                        </DropdownMenu>
+                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
                   </tr>
@@ -1259,21 +1226,15 @@ const UsersTables = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
-                        </DropdownMenu>
+                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
                   </tr>
@@ -1422,21 +1383,15 @@ const UsersTables = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
-                        </DropdownMenu>
+                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
                   </tr>
@@ -1587,21 +1542,15 @@ const UsersTables = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
-                        </DropdownMenu>
+                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
                   </tr>
@@ -1751,21 +1700,15 @@ const UsersTables = () => {
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Action
+                            Edit
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Another action
+                           Delete
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Something else here
-                          </DropdownItem>
-                        </DropdownMenu>
+                         </DropdownMenu>
                       </UncontrolledDropdown>
                     </td>
                   </tr>
