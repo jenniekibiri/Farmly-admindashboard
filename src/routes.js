@@ -50,7 +50,7 @@ var routes = [
   {
     path: "/buyers-tables",
     name: "Buyers",
-    icon: "fa fa-user-friends text-red",
+    icon: "fa fa-user-tag text-red",
     component:Buyers ,
     layout: "/admin",
   },
@@ -58,7 +58,7 @@ var routes = [
   {
     path: "/drivers-tables",
     name: "Drivers",
-    icon: "fa fa-user-friends text-red",
+    icon: "fa fa-truck text-red",
     component:Drivers ,
     layout: "/admin",
   },
