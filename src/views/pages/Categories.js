@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useContext, useEffect } from "react";
 
 // reactstrap components
 import {
@@ -29,8 +29,19 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
+import getCategories from 'context/actions/category'
+import { GlobalContext } from "context/provider";
 
 const Categories = () => {
+  const {categoryState,categoryDispatch} = useContext(GlobalContext);
+  const {category: { data }, } = categoryState;
+  useEffect(() => {
+  if(data.length === 0){
+    getCategories(categoryDispatch);
+  }
+  
+  }, [])
+  console.log(categoryState);
   return (
     <>
       <Header />

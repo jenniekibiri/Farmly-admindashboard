@@ -8,7 +8,7 @@ export const GlobalProvider = ({ children }) => {
     categoryInitialState
   );
   return (
-    <GlobalContext.Provider value={(categoryState, categoryDispatch)}>
+    <GlobalContext.Provider value={{categoryState, categoryDispatch}}>
       {children}
     </GlobalContext.Provider>
   );

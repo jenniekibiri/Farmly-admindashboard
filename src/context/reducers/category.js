@@ -1,4 +1,8 @@
-import { CATEGORY_LOADING,CATEGORY_LOAD_ERROR,CATEGORY_LOAD_SUCCESS } from "context/actions/actionTypes";
+import {
+  CATEGORY_LOADING,
+  CATEGORY_LOAD_ERROR,
+  CATEGORY_LOAD_SUCCESS,
+} from "context/actions/actionTypes";
 const category = (state, { payload, type }) => {
   switch (type) {
     case CATEGORY_LOADING: {
@@ -20,22 +24,20 @@ const category = (state, { payload, type }) => {
         },
       };
     }
-    case CATEGORY_LOAD_ERROR:
-      {
-        return {
-          ...state,
-          category: {
-            ...state.category,
-            loading: false,
-            error: payload,
-          },
-        };
-      }
-
-      break;
+    case CATEGORY_LOAD_ERROR: {
+      return {
+        ...state,
+        category: {
+          ...state.category,
+          loading: false,
+          error: payload,
+        },
+      };
+    }
 
     default:
+      return state;
       break;
   }
 };
-export default category
+export default category;
