@@ -1,16 +1,16 @@
 
 import Index from "views/Index.js";
-import Profile from "views/examples/Profile.js";
-import Maps from "views/examples/Maps.js";
-import Register from "views/examples/Register.js";
-import Login from "views/examples/Login.js";
-import Icons from "views/examples/Icons.js";
+import Profile from "views/pages/Profile.js";
+import Maps from "views/pages/Maps.js";
+import Register from "views/pages/Register.js";
+import Login from "views/pages/Login.js";
+import Icons from "views/pages/Icons.js";
 
-import ProductTables from "views/examples/ProductTables";
-import Categories  from "views/examples/Categories";
-import Drivers from "views/examples/Drivers";
-import Buyers from "views/examples/Buyers";
-import Farmers from "views/examples/Farmers";
+import ProductTables from "views/pages/ProductTables";
+import Categories  from "views/pages/Categories";
+import Drivers from "views/pages/Drivers";
+import Buyers from "views/pages/Buyers";
+import Farmers from "views/pages/Farmers";
 
 
 var routes = [
