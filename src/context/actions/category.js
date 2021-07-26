@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { CATEGORY_LOADING,CATEGORY_LOAD_ERROR,CATEGORY_LOAD_SUCCESS } from "context/actions/actionTypes";
 export default (dispatch) => {
     dispatch({type:CATEGORY_LOADING});
 
