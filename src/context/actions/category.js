@@ -3,7 +3,11 @@ import { CATEGORY_LOADING,CATEGORY_LOAD_ERROR,CATEGORY_LOAD_SUCCESS } from "cont
 export default (dispatch) => {
     dispatch({type:CATEGORY_LOADING});
 
-axios.get('http://localhost:5000/api/categories')
+axios.get('http://localhost:5000/api/categories',{
+    headers: {
+        'Access-Control-Allow-Origin': '*',
+      }
+})
    .then((response)=>{
        dispatch({
            type:CATEGORY_LOAD_SUCCESS,

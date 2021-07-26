@@ -1,4 +1,4 @@
-import React,{ useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 // reactstrap components
 import {
@@ -29,19 +29,20 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import getCategories from 'context/actions/category'
+import getCategories from "context/actions/category";
 import { GlobalContext } from "context/provider";
 
 const Categories = () => {
-  const {categoryState,categoryDispatch} = useContext(GlobalContext);
-  const {category: { data }, } = categoryState;
+  const { categoryState, categoryDispatch } = useContext(GlobalContext);
+  const {
+    category: { data },
+  } = categoryState;
   useEffect(() => {
-  if(data.length === 0){
-    getCategories(categoryDispatch);
-  }
-  
-  }, [])
-  console.log(categoryState);
+    if (data.length === 0) {
+      getCategories(categoryDispatch);
+    }
+  }, []);
+
   return (
     <>
       <Header />
@@ -52,28 +53,34 @@ const Categories = () => {
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
-               
                 <Row className="align-items-center">
                   <div className="col">
-                  <h3 className="mb-0">Categories </h3>
+                    <h3 className="mb-0">Categories </h3>
                     <h6 className="text-uppercase text-light ls-1 mb-1">
                       Overview
                     </h6>
-                
                   </div>
                   <div className="col">
-
-                  <Form role="form">
-              <FormGroup className="mb-3">
-              <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Categoty Name" aria-label="category" aria-describedby="button-addon2"/>
-  <button class="btn btn-danger" type="button" id="button-addon2">Add Category</button>
-</div>
-              </FormGroup>
-             
-              </Form>
-                
-                
+                    <Form role="form">
+                      <FormGroup className="mb-3">
+                        <div class="input-group mb-3">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Categoty Name"
+                            aria-label="category"
+                            aria-describedby="button-addon2"
+                          />
+                          <button
+                            class="btn btn-danger"
+                            type="button"
+                            id="button-addon2"
+                          >
+                            Add Category
+                          </button>
+                        </div>
+                      </FormGroup>
+                    </Form>
                   </div>
                 </Row>
               </CardHeader>
@@ -81,115 +88,68 @@ const Categories = () => {
                 <thead className="thead-light">
                   <tr>
                     <th scope="col">Name</th>
-                 
+
                     <th scope="col" />
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">
-                      <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/bootstrap.jpg")
-                                .default
-                            }
-                          />
-                        </a>
-                        <Media>
-                          <span className="mb-0 text-sm">
-                            Vegetables                        </span>
-                        </Media>
-                      </Media>
-                    </th>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Edit
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                           Delete
-                          </DropdownItem>
-                         </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/bootstrap.jpg")
-                                .default
-                            }
-                          />
-                        </a>
-                        <Media>
-                          <span className="mb-0 text-sm">
-                            Fruits                          </span>
-                        </Media>
-                      </Media>
-                    </th>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Edit
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                           Delete
-                          </DropdownItem>
-                         </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-              
-            
+                  {
+                    categoryState.category.data.data&& categoryState.category.data.data.map((category) => {
+                    return (
+                      <tr>
+                        <th scope="row">
+                          <Media className="align-items-center">
+                            <a
+                              className="avatar rounded-circle mr-3"
+                              href="#pablo"
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              <img
+                                alt="..."
+                                src={
+                                  require("../../assets/img/theme/bootstrap.jpg")
+                                    .default
+                                }
+                              />
+                            </a>
+                            <Media>
+                              <span className="mb-0 text-sm">
+                                {category.categoryName}{" "}
+                              </span>
+                            </Media>
+                          </Media>
+                        </th>
+                        <td className="text-right">
+                          <UncontrolledDropdown>
+                            <DropdownToggle
+                              className="btn-icon-only text-light"
+                              href="#pablo"
+                              role="button"
+                              size="sm"
+                              color=""
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              <i className="fas fa-ellipsis-v" />
+                            </DropdownToggle>
+                            <DropdownMenu className="dropdown-menu-arrow" right>
+                              <DropdownItem
+                                href="#pablo"
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                Edit
+                              </DropdownItem>
+                              <DropdownItem
+                                href="#pablo"
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                Delete
+                              </DropdownItem>
+                            </DropdownMenu>
+                          </UncontrolledDropdown>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </Table>
               <CardFooter className="py-4">
@@ -248,7 +208,6 @@ const Categories = () => {
           </div>
         </Row>
         {/* Dark table */}
-        
       </Container>
     </>
   );
