@@ -1,5 +1,5 @@
 import { CATEGORY_LOADING,CATEGORY_LOAD_ERROR,CATEGORY_LOAD_SUCCESS } from "context/actions/actionTypes";
-const Category = (state, { payload, type }) => {
+const category = (state, { payload, type }) => {
   switch (type) {
     case CATEGORY_LOADING: {
       return {
