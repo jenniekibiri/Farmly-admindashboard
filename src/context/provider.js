@@ -31,6 +31,8 @@ export const GlobalProvider = ({ children }) => {
         productDispatch,
         userState,
         userDispatch,
+        buyerState, buyerDispatch,
+        driverState, driverDispatch
       }}
     >
       {children}
