@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 // reactstrap components
 import {
@@ -22,8 +22,19 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-
+import getDrivers from "context/actions/driver";
+import { GlobalContext } from "context/provider"
 const Drivers = () => {
+  const { driverState, driverDispatch } = useContext(GlobalContext);
+  const {
+    user: { data },
+  } = driverState;
+  console.log(data.data)
+  useEffect(() => {
+    if (data.length === 0) {
+      getDrivers(driverDispatch);
+    }
+  }, []);
   return (
     <>
       <Header />
@@ -50,7 +61,9 @@ const Drivers = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                {
+                    data.data&&data.data.map((user,i)=>(
+<tr>
                     <th scope="row">
                       <Media className="align-items-center">
                         <a
@@ -68,22 +81,22 @@ const Drivers = () => {
                         </a>
                         <Media>
                           <span className="mb-0 text-sm">
-                            Jane Doe
+                           {user.firstName} {user.lastName}
                           </span>
                         </Media>
                       </Media>
                     </th>
-                    <td>jane@gmail.com</td>
+                    <td> {user.email}</td>
                     <td>
                       <Badge color="" className="badge-dot mr-4">
                         <i className="bg-warning" />
                         pending
                       </Badge>
                     </td>
-                    <td>0740902461</td>
+                    <td> {user.phone}</td>
                     <td>
                       <div className="d-flex align-items-center">
-                        <span className="mr-2">Nyeri</span>
+                        <span className="mr-2"> {user.address}</span>
                      </div>
                     </td>
                     <td className="text-right">
@@ -115,7 +128,9 @@ const Drivers = () => {
                       </UncontrolledDropdown>
                     </td>
                   </tr>
-                 
+
+                    ))
+                    }
                 
                 </tbody>
               </Table>
