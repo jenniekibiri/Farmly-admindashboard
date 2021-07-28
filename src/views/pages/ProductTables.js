@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useContext, useEffect }  from "react";
 // reactstrap components
 import {
   Badge,
@@ -22,8 +21,20 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-
+import getProducts from "context/actions/product";
+import { GlobalContext } from "context/provider";
+import product from "context/actions/product";
 const ProductTables = () => {
+  const { productState, productDispatch } = useContext(GlobalContext);
+  const {
+    product: { data },
+  } = productState;
+  console.log(data.data)
+  useEffect(() => {
+    if (data.length === 0) {
+      getProducts(productDispatch);
+    }
+  }, []);
   return (
     <>
       <Header />
@@ -48,70 +59,75 @@ const ProductTables = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">
-                      <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/bootstrap.jpg")
-                                .default
-                            }
-                          />
-                        </a>
-                        <Media>
-                          <span className="mb-0 text-sm">
-                            Argon Design System
-                          </span>
-                        </Media>
-                      </Media>
-                    </th>
-                    <td>Lorem Ipsum is ...</td>
-                   
-                    <td>
-                     500ksh
-                    </td>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <span className="mr-2">50kg</span>
-                        
-                      </div>
-                    </td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Edit
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                           Delete
-                          </DropdownItem>
-                        
-                        </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
+              { 
+            data.data && data.data.map((data,i)=>(
+              <tr>
+              <th scope="row">
+                <Media className="align-items-center">
+                  <a
+                    className="avatar rounded-circle mr-3"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <img
+                      alt="..."
+                      src={
+                        require("../../assets/img/theme/bootstrap.jpg")
+                          .default
+                      }
+                    />
+                  </a>
+                  <Media>
+                    <span className="mb-0 text-sm">
+                      {data.productName}
+                    </span>
+                  </Media>
+                </Media>
+              </th>
+              <td> {data.description}</td>
+             
+              <td>
+              {data.price}
+              </td>
+              <td>
+                <div className="d-flex align-items-center">
+                  <span className="mr-2">{data.quantity}</span>
+                  
+                </div>
+              </td>
+              <td className="text-right">
+                <UncontrolledDropdown>
+                  <DropdownToggle
+                    className="btn-icon-only text-light"
+                    href="#pablo"
+                    role="button"
+                    size="sm"
+                    color=""
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <i className="fas fa-ellipsis-v" />
+                  </DropdownToggle>
+                  <DropdownMenu className="dropdown-menu-arrow" right>
+                    <DropdownItem
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Edit
+                    </DropdownItem>
+                    <DropdownItem
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                    >
+                     Delete
+                    </DropdownItem>
+                  
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              </td>
+            </tr>
+            )) 
+              
+             }
                   
                    
                  
