@@ -1,22 +1,22 @@
 import axios from 'axios';
-import { USER_LOADING, USER_LOAD_ERROR, USER_LOAD_SUCCESS } from "context/actions/actionTypes";
+import { FARMER_LOADING, FARMER_LOAD_ERROR, FARMER_LOAD_SUCCESS } from "context/actions/actionTypes";
 export default (dispatch) => {
-    dispatch({type: USER_LOADING});
+    dispatch({type: FARMER_LOADING});
 
-axios.get('http://localhost:5000/api/users',{
+axios.get('http://localhost:5000/api/farmers',{
     headers: {
         'Access-Control-Allow-Origin': '*',
       }
 })
    .then((response)=>{
        dispatch({
-           type: USER_LOAD_SUCCESS,
+           type: FARMER_LOAD_SUCCESS,
            payload:response
        })
    })
    .catch((error)=>{
        dispatch({
-           tyepe: USER_LOAD_ERROR,
+           tyepe: FARMER_LOAD_ERROR,
            payload:error
        })
    });

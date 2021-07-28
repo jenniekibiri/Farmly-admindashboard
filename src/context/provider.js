@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from "react";
 import category from "./reducers/category";
 import product from "./reducers/product";
-import user from "./reducers/user";
+import user from "./reducers/farmer";
 import categoryInitialState from "./initialStates/categoryInitialState";
 import productInitialState from "./initialStates/productInitialState";
 import userInitialState from "./initialStates/userInitialState";

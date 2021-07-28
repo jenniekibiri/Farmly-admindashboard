@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 // reactstrap components
 import {
@@ -22,10 +22,19 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import getUsers from "context/actions/user";
+import getUsers from "context/actions/farmers";
 import { GlobalContext } from "context/provider"
 const Farmers= () => {
-  
+  const { userState, userDispatch } = useContext(GlobalContext);
+  const {
+    user: { data },
+  } = userState;
+  console.log(data.data)
+  useEffect(() => {
+    if (data.length === 0) {
+      getUsers(userDispatch);
+    }
+  }, []);
   return (
     <>
       <Header />

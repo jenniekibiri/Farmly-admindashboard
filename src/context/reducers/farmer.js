@@ -1,7 +1,7 @@
-import { USER_LOADING, USER_LOAD_ERROR, USER_LOAD_SUCCESS } from "context/actions/actionTypes";
+import { FARMER_LOADING, FARMER_LOAD_ERROR, FARMER_LOAD_SUCCESS } from "context/actions/actionTypes";
   const user = (state, { payload, type }) => {
     switch (type) {
-      case USER_LOADING: {
+      case FARMER_LOADING: {
         return {
           ...state,
           user: {
@@ -10,7 +10,7 @@ import { USER_LOADING, USER_LOAD_ERROR, USER_LOAD_SUCCESS } from "context/action
           },
         };
       }
-      case USER_LOAD_SUCCESS: {
+      case FARMER_LOAD_SUCCESS: {
         return {
           ...state,
           user: {
@@ -20,7 +20,7 @@ import { USER_LOADING, USER_LOAD_ERROR, USER_LOAD_SUCCESS } from "context/action
           },
         };
       }
-      case USER_LOAD_ERROR: {
+      case FARMER_LOAD_ERROR: {
         return {
           ...state,
           user: {
