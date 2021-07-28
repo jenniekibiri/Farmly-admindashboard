@@ -22,8 +22,10 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-
+import getUsers from "context/actions/user";
+import { GlobalContext } from "context/provider"
 const Farmers= () => {
+  
   return (
     <>
       <Header />

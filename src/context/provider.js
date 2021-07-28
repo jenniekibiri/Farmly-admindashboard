@@ -1,8 +1,10 @@
 import React, { createContext, useReducer } from "react";
 import category from "./reducers/category";
 import product from "./reducers/product";
+import user from "./reducers/user";
 import categoryInitialState from "./initialStates/categoryInitialState";
 import productInitialState from "./initialStates/productInitialState";
+import userInitialState from "./initialStates/userInitialState";
 export const GlobalContext = createContext({});
 export const GlobalProvider = ({ children }) => {
   const [categoryState, categoryDispatch] = useReducer(
@@ -13,10 +15,18 @@ export const GlobalProvider = ({ children }) => {
     product,
     productInitialState
   );
+  const [userState, userDispatch] = useReducer(user, userInitialState);
   return (
-    <GlobalContext.Provider value={{categoryState, categoryDispatch,
-      productState, productDispatch
-    }}>
+    <GlobalContext.Provider
+      value={{
+        categoryState,
+        categoryDispatch,
+        productState,
+        productDispatch,
+        userState,
+        userDispatch,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );

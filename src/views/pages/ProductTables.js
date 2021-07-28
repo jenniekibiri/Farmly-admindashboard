@@ -23,7 +23,7 @@ import {
 import Header from "components/Headers/Header.js";
 import getProducts from "context/actions/product";
 import { GlobalContext } from "context/provider";
-import product from "context/actions/product";
+
 const ProductTables = () => {
   const { productState, productDispatch } = useContext(GlobalContext);
   const {
