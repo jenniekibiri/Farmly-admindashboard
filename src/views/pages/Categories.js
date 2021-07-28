@@ -37,6 +37,7 @@ const Categories = () => {
   const {
     category: { data },
   } = categoryState;
+  console.log(data.data)
   useEffect(() => {
     if (data.length === 0) {
       getCategories(categoryDispatch);
