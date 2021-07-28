@@ -10,7 +10,7 @@ import productInitialState from "./initialStates/productInitialState";
 import userInitialState from "./initialStates/userInitialState";
 import buyerInitialState from "./initialStates/buyerInitialState";
 import driverInitialState from "./initialStates/driverInitialState";
-import authInitialState from "./intialstates/authInitialState";
+import authInitialState from "./initialStates/authInitialState";
 export const GlobalContext = createContext({});
 export const GlobalProvider = ({ children }) => {
   const [categoryState, categoryDispatch] = useReducer(
@@ -36,8 +36,10 @@ export const GlobalProvider = ({ children }) => {
         productDispatch,
         userState,
         userDispatch,
-        buyerState, buyerDispatch,
-        driverState, driverDispatch
+        buyerState,
+        buyerDispatch,
+        driverState,
+        driverDispatch,
       }}
     >
       {children}

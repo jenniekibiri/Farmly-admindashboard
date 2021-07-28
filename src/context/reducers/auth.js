@@ -6,6 +6,7 @@ import {
   } from "context/actions/actionTypes";
   
   const auth = (state, { payload, type }) => {
+    console.log(state)
     switch (type) {
      
       case LOGIN_LOADING:

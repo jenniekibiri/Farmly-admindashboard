@@ -1,11 +1,11 @@
 
-import React from "react";
+import React,{ useState, useContext,useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 // reactstrap components
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   FormGroup,
   Form,
@@ -16,9 +16,44 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
+import login from "context/actions/auth/login";
+import { GlobalContext } from "context/provider"
 const Login = () => {
-  
+
+  const [form, setForm] = useState({});
+
+  const history = useHistory();
+
+  const {
+    authDispatch,
+    authState: {
+      auth: { loading, error, data },
+    },
+  } = useContext(GlobalContext);
+
+
+  const onChange =(event) => {
+    console.log({ [event.target.name]: event.target.value})
+    setForm({ ...form, [event.target.name]: event.target.value });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    // register(form)(authDispatch);
+console.log(form)
+    login(form)(authDispatch);
+  };
+  useEffect(() => {
+    if (data) {
+      if (data.user) {
+        history.push("/");
+      }
+    }
+  }, [data]);
+
+
+
+
   return (
     <>
       <Col lg="5" md="7">
@@ -37,7 +72,10 @@ const Login = () => {
                   <Input
                     placeholder="Email"
                     type="email"
+                    onChange={onChange}
                     autoComplete="new-email"
+                    name="email"
+                    value={form.email}
                   />
                 </InputGroup>
               </FormGroup>
@@ -52,6 +90,9 @@ const Login = () => {
                     placeholder="Password"
                     type="password"
                     autoComplete="new-password"
+                    name="password"
+                    value={form.password}
+                    onChange={onChange}
                   />
                 </InputGroup>
               </FormGroup>
@@ -60,6 +101,7 @@ const Login = () => {
                   className="custom-control-input"
                   id=" customCheckLogin"
                   type="checkbox"
+                 
                 />
                 <label
                   className="custom-control-label"
@@ -69,7 +111,9 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button">
+                <Button className="my-4" color="primary" 
+                 onClick={onSubmit}
+                type="submit">
                   Sign in
                 </Button>
               </div>

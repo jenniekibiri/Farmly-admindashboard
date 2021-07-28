@@ -3,12 +3,13 @@ import { LOGIN_LOADING, LOGIN_ERROR, LOGIN_SUCCESS } from "context/actions/actio
 export default   ({ password, email })=>(dispatch) => {
     dispatch({type: LOGIN_LOADING});
 
-axios.post('http://localhost:5000/login',{
+axios.post('http://localhost:5000/api/login',{
       
       password,
       email,
 })
    .then((response)=>{
+       console.log(response)
     localStorage.token = response.data.token;
        dispatch({
            type: LOGIN_SUCCESS,
@@ -17,8 +18,8 @@ axios.post('http://localhost:5000/login',{
    })
    .catch((error)=>{
        dispatch({
-           tyepe: LOGIN_ERROR,
-           payload:error.response ? error.response.data : "COULD NOT CONNECT"
+           type: LOGIN_ERROR,
+           payload:{message:error}
        })
    });
 }

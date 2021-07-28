@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 
 // reactstrap components
 import {
-  Badge,
   Card,
   CardHeader,
   CardFooter,
@@ -14,18 +13,11 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
-  Progress,
   Table,
   Container,
   Row,
-  UncontrolledTooltip,
   FormGroup,
   Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Button,
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
