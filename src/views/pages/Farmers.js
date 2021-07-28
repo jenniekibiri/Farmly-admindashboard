@@ -59,7 +59,9 @@ const Farmers= () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  {
+                    data.data&&data.data.map((user,i)=>(
+<tr>
                     <th scope="row">
                       <Media className="align-items-center">
                         <a
@@ -77,22 +79,22 @@ const Farmers= () => {
                         </a>
                         <Media>
                           <span className="mb-0 text-sm">
-                            Jane Doe
+                           {user.firstName} {user.lastName}
                           </span>
                         </Media>
                       </Media>
                     </th>
-                    <td>jane@gmail.com</td>
+                    <td> {user.email}</td>
                     <td>
                       <Badge color="" className="badge-dot mr-4">
                         <i className="bg-warning" />
                         pending
                       </Badge>
                     </td>
-                    <td>0740902461</td>
+                    <td> {user.phone}</td>
                     <td>
                       <div className="d-flex align-items-center">
-                        <span className="mr-2">Nyeri</span>
+                        <span className="mr-2"> {user.address}</span>
                      </div>
                     </td>
                     <td className="text-right">
@@ -124,6 +126,9 @@ const Farmers= () => {
                       </UncontrolledDropdown>
                     </td>
                   </tr>
+
+                    ))
+                    }
                  
                 
                 </tbody>
