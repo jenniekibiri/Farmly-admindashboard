@@ -84,14 +84,14 @@ const ProductTables = () => {
                   </Media>
                 </Media>
               </th>
-              <td> {data.description}</td>
+              <td> {data.description.substring(0, 50)}...</td>
              
               <td>
-              {data.price}
+              {data.price} KSH
               </td>
               <td>
                 <div className="d-flex align-items-center">
-                  <span className="mr-2">{data.quantity}</span>
+                  <span className="mr-2">{data.quantity} KG</span>
                   
                 </div>
               </td>
