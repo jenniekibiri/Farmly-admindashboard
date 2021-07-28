@@ -1,5 +1,5 @@
 export default  {
-    category:{
+    product:{
         loading:false,
         error: null,
         data:null
