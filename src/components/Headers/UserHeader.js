@@ -1,13 +1,10 @@
 
 import React from "react";
-
+import { isAuthenticated } from "auth/auth";
 // reactstrap components
 import { Button, Container, Row, Col } from "reactstrap";
 
 const UserHeader = () => {
-  let userData=''
-if(localStorage.getItem("user"!==undefined))
-userData =JSON.parse(localStorage.getItem("user"))
 
   return (
     <>
@@ -29,7 +26,7 @@ userData =JSON.parse(localStorage.getItem("user"))
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="7" md="10">
-              <h1 className="display-2 text-white">Hello {userData.user.firstName}</h1>
+              <h1 className="display-2 text-white">Hello {isAuthenticated().user.firstName}</h1>
               <p className="text-white mt-0 mb-5">
                 This is your profile page. You can see the progress you've made
                 with your work and manage your projects or assigned tasks

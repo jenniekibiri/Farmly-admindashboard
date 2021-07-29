@@ -11,13 +11,28 @@ import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 
 import { GlobalProvider } from "context/provider";
+import { isAuthenticated } from "auth/auth";
 
 ReactDOM.render(
   <GlobalProvider>
   <BrowserRouter>
     <Switch>
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+          
+ <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+      <Route path="/admin" render={(props) => 
+      
+      isAuthenticated() && isAuthenticated().user.role === 'admin' ? (
+        <AdminLayout {...props} />
+      ):(
+<Redirect
+to='/auth/login'
+/>
+      )
+      
+     } />
+
+     
+     
       <Redirect from="/" to="/admin/index" />
     </Switch>
   </BrowserRouter>

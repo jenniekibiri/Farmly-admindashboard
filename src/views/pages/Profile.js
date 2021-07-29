@@ -16,11 +16,10 @@ import {
 } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
-
+import { isAuthenticated } from "auth/auth";
 
 const Profile = () => {
-  const userData=JSON.parse(localStorage.getItem("user"))
-  console.log(userData.user)
+
   return (
     <>
       <UserHeader />
@@ -88,7 +87,7 @@ const Profile = () => {
                 </Row>
                 <div className="text-center">
                   <h3>
-                   {userData.firstName}
+                   {isAuthenticated().user.firstName}
                     <span className="font-weight-light">, 27</span>
                   </h3>
                   <div className="h5 font-weight-300">
