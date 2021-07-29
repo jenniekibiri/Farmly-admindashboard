@@ -13,7 +13,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
+import { isAuthenticated } from "auth/auth";
 const AdminNavbar = () => {
   return (
     <>
@@ -27,7 +27,7 @@ const AdminNavbar = () => {
               }
 
             /> */}
-            <h2>Farmly</h2>
+            <h2 className='text-white'>Farmly</h2>
           </NavbarBrand>
           <button className="navbar-toggler" id="navbar-collapse-main">
             <span className="navbar-toggler-icon" />
@@ -57,6 +57,28 @@ const AdminNavbar = () => {
               </Row>
             </div>
             <Nav className="ml-auto" navbar>
+            {!isAuthenticated() && (
+              <>
+                <NavItem>
+                <NavLink
+                  className="nav-link-icon"
+                  to="/auth/register"
+                  tag={Link}
+                >
+                  <i className="ni ni-circle-08" />
+                  <span className="nav-link-inner--text">Register</span>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
+                  <i className="ni ni-key-25" />
+                  <span className="nav-link-inner--text">Login</span>
+                </NavLink>
+              </NavItem>
+              </>
+            )}
+            {isAuthenticated() && (
+              <>
               <NavItem>
                 <NavLink className="nav-link-icon" to="/" tag={Link}>
                   <i className="ni ni-planet" />
@@ -89,6 +111,9 @@ const AdminNavbar = () => {
                   <span className="nav-link-inner--text">Profile</span>
                 </NavLink>
               </NavItem>
+              </>
+            )}
+              
             </Nav>
           </UncontrolledCollapse>
         </Container>
