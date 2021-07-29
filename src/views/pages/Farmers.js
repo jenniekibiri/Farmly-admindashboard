@@ -27,7 +27,7 @@ const Farmers= () => {
   const {
     user: { data },
   } = userState;
-  console.log(data.data)
+
   useEffect(() => {
     if (data.length === 0) {
       getUsers(userDispatch);

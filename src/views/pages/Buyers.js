@@ -28,7 +28,7 @@ const Buyers = () => {
   const {
     user: { data },
   } = buyerState;
-  console.log(data.data)
+  
   useEffect(() => {
     if (data.length === 0) {
       getBuyers(buyerDispatch);

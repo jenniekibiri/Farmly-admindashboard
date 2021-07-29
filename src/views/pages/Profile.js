@@ -17,7 +17,10 @@ import {
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 
+
 const Profile = () => {
+  const userData=JSON.parse(localStorage.getItem("user"))
+  console.log(userData.user)
   return (
     <>
       <UserHeader />
@@ -85,7 +88,7 @@ const Profile = () => {
                 </Row>
                 <div className="text-center">
                   <h3>
-                    Jessica Jones
+                   {userData.firstName}
                     <span className="font-weight-light">, 27</span>
                   </h3>
                   <div className="h5 font-weight-300">

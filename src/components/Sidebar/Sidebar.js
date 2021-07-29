@@ -1,23 +1,18 @@
 
 /*eslint-disable*/
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { NavLink as NavLinkRRD, Link } from "react-router-dom";
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
+import { useHistory} from "react-router-dom";
 
 // reactstrap components
 import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  CardTitle,
   Collapse,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  FormGroup,
   Form,
   Input,
   InputGroupAddon,
@@ -29,16 +24,24 @@ import {
   NavItem,
   NavLink,
   Nav,
-  Progress,
-  Table,
   Container,
   Row,
   Col,
 } from "reactstrap";
+import logout from "context/actions/logout";
+import { GlobalContext } from "context/provider";
 
-var ps;
+
 
 const Sidebar = (props) => {
+  const history = useHistory();
+console.log(history)
+  const { authDispatch: dispatch } = useContext(GlobalContext);
+
+  const handleUserLogout = (e) => {
+    e.preventDefault()
+    logout(history)(dispatch);
+  };
   const [collapseOpen, setCollapseOpen] = useState();
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
@@ -171,7 +174,7 @@ const Sidebar = (props) => {
                 <span>Support</span>
               </DropdownItem>
               <DropdownItem divider />
-              <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+              <DropdownItem onClick={handleUserLogout}>
                 <i className="ni ni-user-run" />
                 <span>Logout</span>
               </DropdownItem>

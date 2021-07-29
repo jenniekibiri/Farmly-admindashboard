@@ -1,6 +1,7 @@
-
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+
+import { useHistory} from "react-router-dom";
 // reactstrap components
 import {
   DropdownMenu,
@@ -18,8 +19,18 @@ import {
   Container,
   Media,
 } from "reactstrap";
+import logout from "context/actions/logout";
+import { GlobalContext } from "context/provider";
 
 const AdminNavbar = (props) => {
+  const history = useHistory();
+
+  const { authDispatch: dispatch } = useContext(GlobalContext);
+
+  const handleUserLogout = (e) => {
+    e.preventDefault()
+    logout(history)(dispatch);
+  }; 
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -83,7 +94,7 @@ const AdminNavbar = (props) => {
                   <span>Support</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem  onClick={handleUserLogout}>
                   <i className="ni ni-user-run" />
                   <span>Logout</span>
                 </DropdownItem>

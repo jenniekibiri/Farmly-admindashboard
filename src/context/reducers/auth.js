@@ -3,10 +3,11 @@ import {
     LOGIN_LOADING,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
+    LOGOUT_USER
   } from "context/actions/actionTypes";
-  
+  import authInitialState from "../initialStates/authInitialState";
   const auth = (state, { payload, type }) => {
-    console.log(state)
+   
     switch (type) {
      
       case LOGIN_LOADING:
@@ -30,7 +31,12 @@ import {
           },
         };
   
-      
+        case LOGOUT_USER: {
+          return {
+            ...state,
+            authInitialState,
+          };
+        }
       case LOGIN_ERROR:
         return {
           ...state,

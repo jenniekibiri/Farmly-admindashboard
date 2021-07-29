@@ -26,7 +26,7 @@ const ProductTables = () => {
   const {
     product: { data },
   } = productState;
-  console.log(data.data)
+  
   useEffect(() => {
     if (data.length === 0) {
       getProducts(productDispatch);

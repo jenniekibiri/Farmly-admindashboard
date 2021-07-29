@@ -33,14 +33,14 @@ const Login = () => {
 
 
   const onChange =(event) => {
-    console.log({ [event.target.name]: event.target.value})
+   
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault()
     // register(form)(authDispatch);
-console.log(form)
+
     login(form)(authDispatch);
   };
   useEffect(() => {

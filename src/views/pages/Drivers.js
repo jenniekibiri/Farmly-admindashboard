@@ -27,7 +27,7 @@ const Drivers = () => {
   const {
     user: { data },
   } = driverState;
-  console.log(data.data)
+  
   useEffect(() => {
     if (data.length === 0) {
       getDrivers(driverDispatch);
