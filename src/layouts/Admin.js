@@ -9,6 +9,7 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 
 import routes from "routes.js";
 
+import reportRoutes from "reportRoutes.js";
 const Admin = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
@@ -34,7 +35,21 @@ const Admin = (props) => {
       }
     });
   };
-
+  const getReportRoutes = (reportRoutes) => {
+    return reportRoutes.map((prop, key) => {
+      if (prop.layout === "/admin") {
+        return (
+          <Route
+            path={prop.layout + prop.path}
+            component={prop.component}
+            key={key}
+          />
+        );
+      } else {
+        return null;
+      }
+    });
+  };
   const getBrandText = (path) => {
     for (let i = 0; i < routes.length; i++) {
       if (
@@ -52,6 +67,7 @@ const Admin = (props) => {
       <Sidebar
         {...props}
         routes={routes}
+        reportRoutes={reportRoutes}
         // logo={{
         //   innerLink: "/admin/index",
         //   imgSrc: require("../assets/img/brand/argon-react.png").default,
@@ -65,6 +81,8 @@ const Admin = (props) => {
         />
         <Switch>
           {getRoutes(routes)}
+          {getReportRoutes(reportRoutes)}
+       
           <Redirect from="*" to="/admin/index" />
         </Switch>
         <Container fluid>

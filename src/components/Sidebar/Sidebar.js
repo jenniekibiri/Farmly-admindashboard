@@ -35,7 +35,6 @@ import { GlobalContext } from "context/provider";
 
 const Sidebar = (props) => {
   const history = useHistory();
-console.log(history)
   const { authDispatch: dispatch } = useContext(GlobalContext);
 
   const handleUserLogout = (e) => {
@@ -75,7 +74,27 @@ console.log(history)
     });
   };
 
-  const { bgColor, routes, logo } = props;
+  const createReportLinks = (reportRoutes) => {
+    console.log(reportRoutes)
+    return reportRoutes.map((prop, key) => {
+      return (
+        <NavItem key={key}>
+          <NavLink
+            to={prop.layout + prop.path}
+            tag={NavLinkRRD}
+            onClick={closeCollapse}
+            activeClassName="active"
+          >
+            <i className={prop.icon} />
+            {prop.name}
+          </NavLink>
+     
+        </NavItem>
+      );
+    });
+  };
+
+  const { bgColor, routes, logo,reportRoutes } = props;
   let navbarBrandProps;
   if (logo && logo.innerLink) {
     navbarBrandProps = {
@@ -234,19 +253,10 @@ console.log(history)
           {/* Heading */}
           <h6 className="navbar-heading text-muted">Reports</h6>
           {/* Navigation */}
+          
           <Nav className="mb-md-3" navbar>
-            <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview?ref=adr-admin-sidebar">
-                <i className="ni ni-spaceship" />
-                Sales
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/colors?ref=adr-admin-sidebar">
-                <i className="ni ni-palette" />
-               Users
-              </NavLink>
-            </NavItem>
+            
+          {createReportLinks(reportRoutes)}
           
           </Nav>
        
