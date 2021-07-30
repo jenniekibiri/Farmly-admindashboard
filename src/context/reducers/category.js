@@ -59,7 +59,6 @@ case ADD_CATEGORY_SUCCESS:{
       loading:false,
       data:[payload,...state.category.data]
     }
-
   }
 }
 case ADD_CATEGORY_ERROR:{
@@ -67,6 +66,9 @@ case ADD_CATEGORY_ERROR:{
     ...state,
     addCategory:{
 ...state.addCategory,
+loading:false,
+error:payload
+
     }
   }
 }
