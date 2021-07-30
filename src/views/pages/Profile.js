@@ -20,6 +20,10 @@ import { isAuthenticated } from "auth/auth";
 
 const Profile = () => {
 
+
+
+  
+
   return (
     <>
       <UserHeader />

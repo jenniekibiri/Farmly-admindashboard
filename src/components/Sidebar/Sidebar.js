@@ -75,7 +75,7 @@ const Sidebar = (props) => {
   };
 
   const createReportLinks = (reportRoutes) => {
-    console.log(reportRoutes)
+   
     return reportRoutes.map((prop, key) => {
       return (
         <NavItem key={key}>
