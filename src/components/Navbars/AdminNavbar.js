@@ -21,12 +21,13 @@ import {
 } from "reactstrap";
 import logout from "context/actions/logout";
 import { GlobalContext } from "context/provider";
+import { isAuthenticated } from "auth/auth";
 
 const AdminNavbar = (props) => {
   const history = useHistory();
 
   const { authDispatch: dispatch } = useContext(GlobalContext);
-
+const user=isAuthenticated().user
   const handleUserLogout = (e) => {
     e.preventDefault()
     logout(history)(dispatch);
@@ -68,7 +69,7 @@ const AdminNavbar = (props) => {
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      Jessica Jones
+                      {user.firstName} {user.lastName}
                     </span>
                   </Media>
                 </Media>

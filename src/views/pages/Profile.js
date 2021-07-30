@@ -1,6 +1,4 @@
-
-import React from "react";
-
+import React,{useEffect,useState} from "react";
 // reactstrap components
 import {
   Button,
@@ -17,12 +15,14 @@ import {
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 import { isAuthenticated } from "auth/auth";
+import { getUserById } from "context/api/apiuser";
+
 
 const Profile = () => {
   const [state, setstate] = useState([]);
-  const id = isAuthenticated().user._id
+  const userId = isAuthenticated().user._id
   useEffect(() => {
-    getUserById(id)
+    getUserById(userId)
     .then((response) => {
       return response.json();
     })
