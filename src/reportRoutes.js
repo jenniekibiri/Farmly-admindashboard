@@ -1,3 +1,5 @@
+import UsersReport from "views/pages/productReports";
+import Tickets from "views/pages/productReports";
 import SalesReports from "views/pages/salesReports";
 import UsersReports from "views/pages/usersReports";
 
@@ -16,6 +18,14 @@ var routes = [
     name: "users",
     icon: "ni ni-single-02 text-red",
     component: UsersReports,
+    layout: "/admin",
+  },
+  
+  {
+    path: "/products",
+    name: "products",
+    icon: "ni ni-single-02 text-red",
+    component: UsersReport,
     layout: "/admin",
   },
 ];
