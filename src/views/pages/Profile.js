@@ -19,10 +19,27 @@ import UserHeader from "components/Headers/UserHeader.js";
 import { isAuthenticated } from "auth/auth";
 
 const Profile = () => {
+  const [state, setstate] = useState([]);
+  const id = isAuthenticated().user._id
+  useEffect(() => {
+    getUserById(id)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      setstate({
+        users: data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+    
+  }, [])
+  console.log(state)
 
 
 
-  
 
   return (
     <>
