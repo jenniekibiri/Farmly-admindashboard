@@ -1,3 +1,6 @@
+import { ADD_CATEGORY_ERROR } from "context/actions/actionTypes";
+import { ADD_CATEGORY_SUCCESS } from "context/actions/actionTypes";
+import { ADD_CATEGORY_LOAD } from "context/actions/actionTypes";
 import {
   CATEGORY_LOADING,
   CATEGORY_LOAD_ERROR,
@@ -34,10 +37,43 @@ const category = (state, { payload, type }) => {
         },
       };
     }
+case ADD_CATEGORY_LOAD:{
+  return{
+    ...state,
+    addCategory:{
+      ...state.addCategory,
+      loading:false
+    }
+  }
+}
+case ADD_CATEGORY_SUCCESS:{
+  return{
+    ...state,
+    addCategory: {
+      ...state.addContact,
+      loading: false,
+      data: payload,
+    },
+    category:{
+      ...state.category,
+      loading:false,
+      data:[payload,...state.category.data]
+    }
+
+  }
+}
+case ADD_CATEGORY_ERROR:{
+  return{
+    ...state,
+    addCategory:{
+...state.addCategory,
+    }
+  }
+}
 
     default:
       return state;
-      break;
+      
   }
 };
 export default category;
