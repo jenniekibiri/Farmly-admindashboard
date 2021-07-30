@@ -36,7 +36,7 @@ const Profile = () => {
     });
     
   }, [])
-  console.log(state)
+  // console.log(state.users.firstName)
 
 
 
@@ -166,14 +166,14 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-username"
+                            htmlFor="input-firstname"
                           >
-                            Username
+                            Firstname
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="lucky.jesse"
-                            id="input-username"
+                            defaultValue={state.users&&state.users.firstName}
+                            id="input-firstname"
                             placeholder="Username"
                             type="text"
                           />
@@ -183,15 +183,17 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-email"
+                            htmlFor="input-lastname"
+                         
                           >
-                            Email address
+                          LastName
                           </label>
                           <Input
                             className="form-control-alternative"
-                            id="input-email"
-                            placeholder="jesse@example.com"
-                            type="email"
+                            id="input-lastname"
+                            placeholder="lastname"
+                            defaultValue={state.users&&state.users.lastName}
+                            type="text"
                           />
                         </FormGroup>
                       </Col>
@@ -201,16 +203,16 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-first-name"
+                            htmlFor="input-email"
                           >
-                            First name
+                            email
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="Lucky"
-                            id="input-first-name"
-                            placeholder="First name"
-                            type="text"
+                            defaultValue={state.users&&state.users.email}
+                            id="input-email"
+                            placeholder="email"
+                            type="email"
                           />
                         </FormGroup>
                       </Col>
@@ -218,16 +220,18 @@ const Profile = () => {
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-last-name"
+                            htmlFor="input-phone"
+                    
                           >
-                            Last name
+                            phone
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="Jesse"
-                            id="input-last-name"
-                            placeholder="Last name"
-                            type="text"
+                             
+                            defaultValue={state.users&&state.users.phone}
+                            id="phone"
+                            placeholder="phone"
+                            type="phone"
                           />
                         </FormGroup>
                       </Col>
@@ -250,7 +254,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                            defaultValue={state.users&&state.users.address}
                             id="input-address"
                             placeholder="Home Address"
                             type="text"
