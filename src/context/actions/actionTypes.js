@@ -20,3 +20,4 @@ export const LOGIN_LOADING = "LOGIN_LOADING";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOGOUT_USER = "LOGOUT_USER";
+export const CLEAR_ADD_CATEGORY= "CLEAR_ADD_CATEGORY";

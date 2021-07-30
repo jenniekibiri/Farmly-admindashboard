@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect,useState } from "react";
 
 // reactstrap components
 import {
@@ -22,17 +22,56 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import getCategories from "context/actions/category";
+import addCategory from 'context/actions/createCategory'
+import clearCreateCategory from "context/actions/clearcategory";
 import { GlobalContext } from "context/provider";
-
+import { isAuthenticated } from "auth/auth";
+import { useHistory } from "react-router-dom";
 const Categories = () => {
-  const { categoryState, categoryDispatch } = useContext(GlobalContext);
+  const history = useHistory();
+
+const [category,setCategory]=useState({});
+  const { 
+    categoryDispatch ,
+    categoryState,
+  
+  } = useContext(GlobalContext);
+
   const {
     category: { data },
+    addCategory:{
+      loading, error, somedata
+    }
   } = categoryState;
   
+  const userId =isAuthenticated().user._id
+const token= isAuthenticated().user.token
+
+
+  const onChange =(event) => {
+   
+    setCategory({ ...category, [event.target.name]: event.target.value });
+    console.log(category)
+  };
+  const onSubmit = (e) => {
+    e.preventDefault()
+    // register(form)(authDispatch);
+    console.log(category)
+    addCategory({category,userId,token})(categoryDispatch);
+  };
+  useEffect(() => {
+    if (somedata) {
+      history.push("/admin/category-tables");
+    }
+    return () => {
+      clearCreateCategory()(categoryDispatch);
+    };
+  }, [somedata]);
   useEffect(() => {
     if (data.length === 0) {
       getCategories(categoryDispatch);
+    
+
     }
   }, []);
 
@@ -62,11 +101,15 @@ const Categories = () => {
                             class="form-control"
                             placeholder="Categoty Name"
                             aria-label="category"
+                            name='categoryName'
+                            value={category.categoryName}
+                            onChange={onChange}
                             aria-describedby="button-addon2"
                           />
                           <button
                             class="btn btn-danger"
-                            type="button"
+                            type='submit'
+                            onClick={onSubmit}
                             id="button-addon2"
                           >
                             Add Category
