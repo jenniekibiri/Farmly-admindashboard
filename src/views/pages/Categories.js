@@ -1,4 +1,4 @@
-import React, { useContext, useEffect,useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // reactstrap components
 import {
@@ -22,42 +22,44 @@ import {
 // core components
 import Header from "components/Headers/Header.js";
 import getCategories from "context/actions/category";
-import addCategory from 'context/actions/createCategory'
+import addCategory from "context/actions/createCategory";
 import clearCreateCategory from "context/actions/clearcategory";
 import { GlobalContext } from "context/provider";
 import { isAuthenticated } from "auth/auth";
 import { useHistory } from "react-router-dom";
+import { deleteCategory } from "context/api/apiuser";
 const Categories = () => {
   const history = useHistory();
 
-const [category,setCategory]=useState({});
-  const { 
-    categoryDispatch ,
-    categoryState,
-  
-  } = useContext(GlobalContext);
+  const [category, setCategory] = useState({});
+  const { categoryDispatch, categoryState } = useContext(GlobalContext);
 
   const {
     category: { data },
-    addCategory:{
-      loading, error, somedata
-    }
+    addCategory: { loading, error, somedata },
   } = categoryState;
-  
-  const userId =isAuthenticated().user._id
-const token= isAuthenticated().user.token
 
+  const userId = isAuthenticated().user._id;
+  const token = isAuthenticated().user.token;
 
-  const onChange =(event) => {
-   
+  const onChange = (event) => {
     setCategory({ ...category, [event.target.name]: event.target.value });
-    console.log(category)
+    console.log(category);
   };
   const onSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // register(form)(authDispatch);
-    console.log(category)
-    addCategory({category,userId,token})(categoryDispatch);
+    console.log(category);
+    addCategory({ category, userId, token })(categoryDispatch);
+  };
+
+  const handleDelete = (categoryId) => (e) => {
+    const userId = isAuthenticated().user._id;
+    console.log(isAuthenticated());
+    const token = isAuthenticated().token;
+
+    e.preventDefault();
+    deleteCategory(userId, token, categoryId);
   };
   useEffect(() => {
     if (somedata) {
@@ -66,12 +68,11 @@ const token= isAuthenticated().user.token
     return () => {
       clearCreateCategory()(categoryDispatch);
     };
-  }, [somedata]);
+  }, [somedata, categoryDispatch, history]);
+
   useEffect(() => {
     if (data.length === 0) {
       getCategories(categoryDispatch);
-    
-
     }
   }, []);
 
@@ -101,14 +102,14 @@ const token= isAuthenticated().user.token
                             class="form-control"
                             placeholder="Categoty Name"
                             aria-label="category"
-                            name='categoryName'
+                            name="categoryName"
                             value={category.categoryName}
                             onChange={onChange}
                             aria-describedby="button-addon2"
                           />
                           <button
                             class="btn btn-danger"
-                            type='submit'
+                            type="submit"
                             onClick={onSubmit}
                             id="button-addon2"
                           >
@@ -129,63 +130,66 @@ const token= isAuthenticated().user.token
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    categoryState.category.data.data&& categoryState.category.data.data.map((category) => {
-                    return (
-                      <tr>
-                        <th scope="row">
-                          <Media className="align-items-center">
-                            <a
-                              className="avatar rounded-circle mr-3"
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              <img
-                                alt="..."
-                                src={
-                                  require("../../assets/img/theme/bootstrap.jpg")
-                                    .default
-                                }
-                              />
-                            </a>
-                            <Media>
-                              <span className="mb-0 text-sm">
-                                {category.categoryName}{" "}
-                              </span>
+                  {categoryState.category.data.data &&
+                    categoryState.category.data.data.map((category) => {
+                      return (
+                        <tr>
+                          <th scope="row">
+                            <Media className="align-items-center">
+                              <a
+                                className="avatar rounded-circle mr-3"
+                                href="#pablo"
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                <img
+                                  alt="..."
+                                  src={
+                                    require("../../assets/img/theme/bootstrap.jpg")
+                                      .default
+                                  }
+                                />
+                              </a>
+                              <Media>
+                                <span className="mb-0 text-sm">
+                                  {category.categoryName}{" "}
+                                </span>
+                              </Media>
                             </Media>
-                          </Media>
-                        </th>
-                        <td className="text-right">
-                          <UncontrolledDropdown>
-                            <DropdownToggle
-                              className="btn-icon-only text-light"
-                              href="#pablo"
-                              role="button"
-                              size="sm"
-                              color=""
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              <i className="fas fa-ellipsis-v" />
-                            </DropdownToggle>
-                            <DropdownMenu className="dropdown-menu-arrow" right>
-                              <DropdownItem
+                          </th>
+                          <td className="text-right">
+                            <UncontrolledDropdown>
+                              <DropdownToggle
+                                className="btn-icon-only text-light"
                                 href="#pablo"
+                                role="button"
+                                size="sm"
+                                color=""
                                 onClick={(e) => e.preventDefault()}
                               >
-                                Edit
-                              </DropdownItem>
-                              <DropdownItem
-                                href="#pablo"
-                                onClick={(e) => e.preventDefault()}
+                                <i className="fas fa-ellipsis-v" />
+                              </DropdownToggle>
+                              <DropdownMenu
+                                className="dropdown-menu-arrow"
+                                right
                               >
-                                Delete
-                              </DropdownItem>
-                            </DropdownMenu>
-                          </UncontrolledDropdown>
-                        </td>
-                      </tr>
-                    );
-                  })}
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={(e) => e.preventDefault()}
+                                >
+                                  Edit
+                                </DropdownItem>
+                                <DropdownItem
+                                  href="#pablo"
+                                  onClick={handleDelete(category._id)}
+                                >
+                                  Delete
+                                </DropdownItem>
+                              </DropdownMenu>
+                            </UncontrolledDropdown>
+                          </td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </Table>
               <CardFooter className="py-4">
