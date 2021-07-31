@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-
+import deleteDriver from "context/actions/driver/deleteDriver";
 // reactstrap components
 import {
   Badge,
@@ -33,6 +33,14 @@ const Drivers = () => {
       getDrivers(driverDispatch);
     }
   }, []);
+
+
+const handleDelete =(id)=>(e)=>{
+  e.preventDefault();
+  deleteDriver(id)(driverDispatch)
+  
+}
+
   return (
     <>
       <Header />
@@ -118,7 +126,7 @@ const Drivers = () => {
                           </DropdownItem>
                           <DropdownItem
                             href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            onClick={handleDelete(user._id)}
                           >
                            Delete
                           </DropdownItem>

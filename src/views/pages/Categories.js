@@ -68,7 +68,7 @@ const Categories = () => {
     return () => {
       clearCreateCategory()(categoryDispatch);
     };
-  }, [somedata, categoryDispatch, history]);
+  }, []);
 
   useEffect(() => {
     if (data.length === 0) {
