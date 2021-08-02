@@ -16,12 +16,46 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
+import { GlobalContext } from "context/globalState";
+import axios from "axios";
 const Login = () => {
+  const history = useHistory()
+  const { login,user } =  useContext(GlobalContext);
+  const [state, setstate] = useState([]);
+  const onChange = (event) => {
+    setstate({ ...state, [event.target.name]: event.target.value });
+  };
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const newUser = {
+      email: state.email,
+      password:state.password
+    };
+    login(newUser);
+    axios
+      .post(`http://localhost:5000/api/login`, {
+        email: state.email,
+        password:state.password
 
+        //   Authorization: `Bearer ${token}`,
+      })
+      .then((response) => {
+        console.log(response)
+        localStorage.setItem("user", JSON.stringify(response.data))
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-
-
+  useEffect(() => {
+    if (user) {
+      if (user.data) {
+        history.push("/admin/index");
+      }
+    }
+  }, [user]);
 
   return (
     <>
@@ -41,10 +75,10 @@ const Login = () => {
                   <Input
                     placeholder="Email"
                     type="email"
-                    // onChange={onChange}
+                    onChange={onChange}
                     autoComplete="new-email"
                     name="email"
-                    // value={form.email}
+                    value={state.email}
                   />
                 </InputGroup>
               </FormGroup>
@@ -60,8 +94,8 @@ const Login = () => {
                     type="password"
                     autoComplete="new-password"
                     name="password"
-                    // value={form.password}
-                    // onChange={onChange}
+                    value={state.password}
+                    onChange={onChange}
                   />
                 </InputGroup>
               </FormGroup>
@@ -81,7 +115,7 @@ const Login = () => {
               </div>
               <div className="text-center">
                 <Button className="my-4" color="primary" 
-                //  onClick={onSubmit}
+                 onClick={onSubmit}
                 type="submit">
                   Sign in
                 </Button>

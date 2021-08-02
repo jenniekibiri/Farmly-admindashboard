@@ -51,7 +51,7 @@ const Categories = () => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    const newCategory = {
+    const newCategory = { 
       categoryName: state.categoryName,
     };
     addCategory(newCategory);

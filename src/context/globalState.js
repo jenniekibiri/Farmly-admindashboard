@@ -1,7 +1,8 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer,useEffect } from "react";
 import AppReducer from "./AppReducer";
 import driverReducer from "./driverReducer";
 import farmerReducer from "./farrmerReducer";
+import loginReducer from "./loginReducer";
 import productReducer from "./productReducer";
 
 // Initial state
@@ -17,6 +18,9 @@ const farmerInitialState = {
 const productInitialState = {
   products: [],
 };
+ const logInInitialState ={
+   user:JSON.parse(localStorage.getItem("user"))  || []
+ }
 // Create context
 export const GlobalContext = createContext({});
 
@@ -38,6 +42,13 @@ export const GlobalProvider = ({ children }) => {
     productReducer,
     productInitialState
   );
+  const [loginState, loginDispatch] = useReducer(
+    loginReducer,
+    logInInitialState,
+  );
+
+  
+
   // Actions
   function deleteCategory(categoryId) {
     categoryDispatch({
@@ -80,6 +91,11 @@ export const GlobalProvider = ({ children }) => {
       type: "ADD_CATEGORY",
       payload: category,
     });
+  } function login(user) {
+    loginDispatch({
+      type: "LOGIN",
+      payload: user,
+    });
   }
   function getCategories(categories) {
     categoryDispatch({
@@ -112,6 +128,7 @@ export const GlobalProvider = ({ children }) => {
         categories: categoryState.categories,
         drivers: driverState.drivers,
         farmers:farmerState.farmers,
+        user:loginState.user,
         products:productState.products,
         profile:
         getProducts,
@@ -122,7 +139,8 @@ export const GlobalProvider = ({ children }) => {
         deleteFarmer,
         getDrivers,
         deleteDriver,
-        getFarmers
+        getFarmers,
+        login
       }}
     >
       {children}

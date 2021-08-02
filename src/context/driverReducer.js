@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
-    console.log(action.payload)
-    console.log(state.drivers)
+    
     switch (action.type) {
        
         case "DELETE_DRIVER":
