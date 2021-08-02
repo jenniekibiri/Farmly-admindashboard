@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-
+import axios from "axios";
 // reactstrap components
 import {
   Card,
@@ -21,61 +21,73 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import getCategories from "context/actions/category";
-import addCategory from "context/actions/createCategory";
-import clearCreateCategory from "context/actions/clearcategory";
-import { GlobalContext } from "context/provider";
+import { GlobalContext } from "context/globalState";
 import { isAuthenticated } from "auth/auth";
-import { useHistory } from "react-router-dom";
-import { deleteCategory } from "context/api/apiuser";
+
+
 const Categories = () => {
-  const history = useHistory();
+  const { addCategory, categories, getCategories, deleteCategory } =
+    useContext(GlobalContext);
 
-  const [category, setCategory] = useState({});
-  const { categoryDispatch, categoryState } = useContext(GlobalContext);
-
-  const {
-    category: { data },
-    addCategory: { loading, error, somedata },
-  } = categoryState;
-
-  const userId = isAuthenticated().user._id;
-  const token = isAuthenticated().user.token;
+  const [state, setstate] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/categories", {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((response) => {
+       
+        getCategories(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const onChange = (event) => {
-    setCategory({ ...category, [event.target.name]: event.target.value });
-    console.log(category);
+    setstate({ ...state, [event.target.name]: event.target.value });
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    // register(form)(authDispatch);
-    console.log(category);
-    addCategory({ category, userId, token })(categoryDispatch);
-  };
-
-  const handleDelete = (categoryId) => (e) => {
-    const userId = isAuthenticated().user._id;
-    console.log(isAuthenticated());
-    const token = isAuthenticated().token;
-
-    e.preventDefault();
-    deleteCategory(userId, token, categoryId);
-  };
-  useEffect(() => {
-    if (somedata) {
-      history.push("/admin/category-tables");
-    }
-    return () => {
-      clearCreateCategory()(categoryDispatch);
+    const newCategory = {
+      categoryName: state.categoryName,
     };
-  }, []);
+    addCategory(newCategory);
+    axios
+      .post(`http://localhost:5000/api/category/create`, {
+        categoryName: state.categoryName,
+        //   Authorization: `Bearer ${token}`,
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleDelete = (categoryId) => (e) => {
+    e.preventDefault();
+    const userId = isAuthenticated().user._id;
+  
+    const token = isAuthenticated().token;
+   
+    axios
+      .delete(`http://localhost:5000/api/category/${categoryId}/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        return response;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-  useEffect(() => {
-    if (data.length === 0) {
-      getCategories(categoryDispatch);
-    }
-  }, []);
-
+    deleteCategory(categoryId);
+  };
   return (
     <>
       <Header />
@@ -103,7 +115,7 @@ const Categories = () => {
                             placeholder="Categoty Name"
                             aria-label="category"
                             name="categoryName"
-                            value={category.categoryName}
+                            value={state.categoryName}
                             onChange={onChange}
                             aria-describedby="button-addon2"
                           />
@@ -130,66 +142,59 @@ const Categories = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {categoryState.category.data.data &&
-                    categoryState.category.data.data.map((category) => {
-                      return (
-                        <tr>
-                          <th scope="row">
-                            <Media className="align-items-center">
-                              <a
-                                className="avatar rounded-circle mr-3"
-                                href="#pablo"
-                                onClick={(e) => e.preventDefault()}
-                              >
-                                <img
-                                  alt="..."
-                                  src={
-                                    require("../../assets/img/theme/bootstrap.jpg")
-                                      .default
-                                  }
-                                />
-                              </a>
-                              <Media>
-                                <span className="mb-0 text-sm">
-                                  {category.categoryName}{" "}
-                                </span>
-                              </Media>
+                  {categories.map((item) => {
+                                    return (
+                      <tr>
+                        <th scope="row">
+                          <Media className="align-items-center">
+                            <a
+                              className="avatar rounded-circle mr-3"
+                              href="#pablo"
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              <img
+                                alt="..."
+                                src={
+                                  require("../../assets/img/theme/bootstrap.jpg")
+                                    .default
+                                }
+                              />
+                            </a>
+                            <Media>
+                              <span className="mb-0 text-sm">
+                                {item.categoryName}
+                              </span>
                             </Media>
-                          </th>
-                          <td className="text-right">
-                            <UncontrolledDropdown>
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
+                          </Media>
+                        </th>
+                        <td className="text-right">
+                          <UncontrolledDropdown>
+                            <DropdownToggle
+                              className="btn-icon-only text-light"
+                              href="#pablo"
+                              role="button"
+                              size="sm"
+                              color=""
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              <i className="fas fa-ellipsis-v" />
+                            </DropdownToggle>
+                            <DropdownMenu className="dropdown-menu-arrow" right>
+                              <DropdownItem
                                 href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
                                 onClick={(e) => e.preventDefault()}
                               >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu
-                                className="dropdown-menu-arrow"
-                                right
-                              >
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={(e) => e.preventDefault()}
-                                >
-                                  Edit
-                                </DropdownItem>
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={handleDelete(category._id)}
-                                >
-                                  Delete
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                                Edit
+                              </DropdownItem>
+                              <DropdownItem onClick={handleDelete(item._id)}>
+                                Delete
+                              </DropdownItem>
+                            </DropdownMenu>
+                          </UncontrolledDropdown>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </Table>
               <CardFooter className="py-4">

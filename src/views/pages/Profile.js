@@ -15,7 +15,7 @@ import {
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
 import { isAuthenticated } from "auth/auth";
-import { getUserById } from "context/api/apiuser";
+import { getUserById } from "api/apiuser";
 
 
 const Profile = () => {

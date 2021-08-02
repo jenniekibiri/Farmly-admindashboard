@@ -10,8 +10,10 @@ import "assets/scss/argon-dashboard-react.scss";
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 
-import { GlobalProvider } from "context/provider";
+
+
 import { isAuthenticated } from "auth/auth";
+import { GlobalProvider } from "context/globalState";
 
 ReactDOM.render(
   <GlobalProvider>

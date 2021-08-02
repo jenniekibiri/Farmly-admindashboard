@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import deleteDriver from "context/actions/driver/deleteDriver";
+import axios from "axios";
 // reactstrap components
 import {
   Badge,
@@ -20,36 +20,51 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import getDrivers from "context/actions/driver";
-import { GlobalContext } from "context/provider"
+import { GlobalContext } from "context/globalState";
+
 const Drivers = () => {
-  const { driverState, driverDispatch } = useContext(GlobalContext);
-  const {
-    user: { data },
-  } = driverState;
-  
+  const { getDrivers, drivers,deleteDriver } = useContext(GlobalContext);
+
   useEffect(() => {
-    if (data.length === 0) {
-      getDrivers(driverDispatch);
-    }
+    axios
+      .get("http://localhost:5000/api/drivers", {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((response) => {
+        getDrivers(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
-
-
-const handleDelete =(id)=>(e)=>{
-  e.preventDefault();
-  deleteDriver(id)(driverDispatch)
+  const handleDelete = (userId) => (e) => {
+      console.log(userId)
+    e.preventDefault();
   
-}
+    axios
+      .delete(`http://localhost:5000/api/user/${userId}`, {
+        headers: {},
+      })
+      .then((response) => {
+        //signout user
+        return response;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
+      deleteDriver(userId);
+  };
   return (
     <>
       <Header />
       {/* Page content */}
       <Container className="mt--7" fluid>
         {/* Table */}
-      
-        <Row className="mt-5">
 
+        <Row className="mt-5">
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
@@ -67,14 +82,14 @@ const handleDelete =(id)=>(e)=>{
                   </tr>
                 </thead>
                 <tbody>
-                {
-                    data.data&&data.data.map((user,i)=>(
-<tr>
-                    <th scope="row">
-                      <Media className="align-items-center">
-                        <a
+                  {drivers.map((user) => {
+                    return (
+                      <tr key={user._id}>
+                        <th scope="row">
+                          <Media className="align-items-center">
+                            {/* <a
                           className="avatar rounded-circle mr-3"
-                          href="#pablo"
+                          
                           onClick={(e) => e.preventDefault()}
                         >
                           <img
@@ -84,60 +99,51 @@ const handleDelete =(id)=>(e)=>{
                                 .default
                             }
                           />
-                        </a>
-                        <Media>
-                          <span className="mb-0 text-sm">
-                           {user.firstName} {user.lastName}
-                          </span>
-                        </Media>
-                      </Media>
-                    </th>
-                    <td> {user.email}</td>
-                    <td>
-                      <Badge color="" className="badge-dot mr-4">
-                        <i className="bg-warning" />
-                        pending
-                      </Badge>
-                    </td>
-                    <td> {user.phone}</td>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <span className="mr-2"> {user.address}</span>
-                     </div>
-                    </td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            Edit
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={handleDelete(user._id)}
-                          >
-                           Delete
-                          </DropdownItem>
-                         </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-
-                    ))
-                    }
-                
+                        </a> */}
+                            <Media>
+                              <span className="mb-0 text-sm">
+                                {user.firstName} {user.lastName}
+                              </span>
+                            </Media>
+                          </Media>
+                        </th>
+                        <td>{user.email}</td>
+                        <td>
+                          <Badge color="" className="badge-dot mr-4">
+                            <i className="bg-warning" />
+                            pending
+                          </Badge>
+                        </td>
+                        <td>{user.phone}</td>
+                        <td>
+                          <div className="d-flex align-items-center">
+                            <span className="mr-2">{user.address}</span>
+                          </div>
+                        </td>
+                        <td className="text-right">
+                          <UncontrolledDropdown>
+                            <DropdownToggle
+                              className="btn-icon-only text-light"
+                              role="button"
+                              size="sm"
+                              color=""
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              <i className="fas fa-ellipsis-v" />
+                            </DropdownToggle>
+                            <DropdownMenu className="dropdown-menu-arrow" right>
+                              <DropdownItem onClick={(e) => e.preventDefault()}>
+                                Edit
+                              </DropdownItem>
+                              <DropdownItem onClick={handleDelete(user._id)}>
+                                Delete
+                              </DropdownItem>
+                            </DropdownMenu>
+                          </UncontrolledDropdown>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </Table>
               <CardFooter className="py-4">
@@ -148,7 +154,6 @@ const handleDelete =(id)=>(e)=>{
                   >
                     <PaginationItem className="disabled">
                       <PaginationLink
-                        href="#pablo"
                         onClick={(e) => e.preventDefault()}
                         tabIndex="-1"
                       >
@@ -157,34 +162,22 @@ const handleDelete =(id)=>(e)=>{
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem className="active">
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
                         1
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
                         2 <span className="sr-only">(current)</span>
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
                         3
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
                         <i className="fas fa-angle-right" />
                         <span className="sr-only">Next</span>
                       </PaginationLink>

@@ -1,5 +1,5 @@
 
-import { list } from "context/api/apiuser";
+import { list } from "api/apiuser";
 import React, { useEffect,useState } from "react";
 
 // reactstrap components

@@ -8,8 +8,9 @@ export const  list = () => {
           Method: "GET",
         })
   }
-  export const  deleteCategory = (userId,token,categoryId) => {
-      console.log(token)
+  export const  deleteCategoryAPI = async (userId,token,categoryId) => {
+
+    
     return  fetch(`http://localhost:5000/api/category/${categoryId}/${userId}`, {
         method: "DELETE",
         headers: {
@@ -25,3 +26,4 @@ export const  list = () => {
   }
  
  
+  

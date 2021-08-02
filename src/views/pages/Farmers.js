@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import axios from "axios";
 
 // reactstrap components
 import {
@@ -20,19 +21,46 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import getUsers from "context/actions/farmers";
-import { GlobalContext } from "context/provider"
-const Farmers= () => {
-  const { userState, userDispatch } = useContext(GlobalContext);
-  const {
-    user: { data },
-  } = userState;
+import { GlobalContext } from "context/globalState";
+
+const Farmers = () => {
+  const { getFarmers, farmers, deleteFarmer } = useContext(GlobalContext);
+
+ 
 
   useEffect(() => {
-    if (data.length === 0) {
-      getUsers(userDispatch);
-    }
+    axios
+      .get("http://localhost:5000/api/farmers", {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((response) => {
+        getFarmers(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
+
+  const handleDelete = (userId) => (e) => {
+    console.log(userId);
+    e.preventDefault();
+
+    axios
+      .delete(`http://localhost:5000/api/user/${userId}`, {
+        headers: {},
+      })
+      .then((response) => {
+        //signout user
+        return response;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    deleteFarmer(userId);
+  };
   return (
     <>
       <Header />
@@ -57,78 +85,73 @@ const Farmers= () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    data.data&&data.data.map((user,i)=>(
-<tr>
-                    <th scope="row">
-                      <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/bootstrap.jpg")
-                                .default
-                            }
-                          />
-                        </a>
-                        <Media>
-                          <span className="mb-0 text-sm">
-                           {user.firstName} {user.lastName}
-                          </span>
+                  {farmers.map((user, i) => (
+                    <tr>
+                      <th scope="row">
+                        <Media className="align-items-center">
+                          <a
+                            className="avatar rounded-circle mr-3"
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            <img
+                              alt="..."
+                              src={
+                                require("../../assets/img/theme/bootstrap.jpg")
+                                  .default
+                              }
+                            />
+                          </a>
+                          <Media>
+                            <span className="mb-0 text-sm">
+                              {user.firstName} {user.lastName}
+                            </span>
+                          </Media>
                         </Media>
-                      </Media>
-                    </th>
-                    <td> {user.email}</td>
-                    <td>
-                      <Badge color="" className="badge-dot mr-4">
-                        <i className="bg-warning" />
-                        pending
-                      </Badge>
-                    </td>
-                    <td> {user.phone}</td>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <span className="mr-2"> {user.address}</span>
-                     </div>
-                    </td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
+                      </th>
+                      <td> {user.email}</td>
+                      <td>
+                        <Badge color="" className="badge-dot mr-4">
+                          <i className="bg-warning" />
+                          pending
+                        </Badge>
+                      </td>
+                      <td> {user.phone}</td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <span className="mr-2"> {user.address}</span>
+                        </div>
+                      </td>
+                      <td className="text-right">
+                        <UncontrolledDropdown>
+                          <DropdownToggle
+                            className="btn-icon-only text-light"
                             href="#pablo"
+                            role="button"
+                            size="sm"
+                            color=""
                             onClick={(e) => e.preventDefault()}
                           >
-                            Edit
-                          </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                           Delete
-                          </DropdownItem>
-                         </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-
-                    ))
-                    }
-                 
-                
+                            <i className="fas fa-ellipsis-v" />
+                          </DropdownToggle>
+                          <DropdownMenu className="dropdown-menu-arrow" right>
+                            <DropdownItem
+                              href="#pablo"
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              Edit
+                            </DropdownItem>
+                            <DropdownItem
+                              href="#pablo"
+                              onClick={handleDelete(user._id)}
+                            >
+                              Delete
+                            </DropdownItem>
+                          </DropdownMenu>
+                        </UncontrolledDropdown>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
               <CardFooter className="py-4">
@@ -186,7 +209,6 @@ const Farmers= () => {
             </Card>
           </div>
         </Row>
-       
       </Container>
     </>
   );

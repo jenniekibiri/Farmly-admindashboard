@@ -18,20 +18,44 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import getProducts from "context/actions/product";
-import { GlobalContext } from "context/provider";
-
+import axios from "axios";
+import { GlobalContext } from "context/globalState";
+import { isAuthenticated } from "auth/auth";
 const ProductTables = () => {
-  const { productState, productDispatch } = useContext(GlobalContext);
-  const {
-    product: { data },
-  } = productState;
+    const { getProducts, products,deleteProduct } = useContext(GlobalContext);
+
+    useEffect(() => {
+      axios
+        .get("http://localhost:5000/api/products", {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        })
+        .then((response) => {
+          getProducts(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
+    const handleDelete = (productId) => (e) => {
+        console.log(productId)
+      e.preventDefault();
+      const userId = isAuthenticated().user._id;
+      axios
+      .delete(`http://localhost:5000/api/product/${productId}/${userId}`, {
+          headers: {},
+        })
+        .then((response) => {
+          //signout user
+          return response;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   
-  useEffect(() => {
-    if (data.length === 0) {
-      getProducts(productDispatch);
-    }
-  }, []);
+        deleteProduct(productId);
+    };
   return (
     <>
       <Header />
@@ -57,7 +81,7 @@ const ProductTables = () => {
                 </thead>
                 <tbody>
               { 
-            data.data && data.data.map((data,i)=>(
+            products.map((data,i)=>(
               <tr>
               <th scope="row">
                 <Media className="align-items-center">
@@ -113,7 +137,7 @@ const ProductTables = () => {
                     </DropdownItem>
                     <DropdownItem
                       href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={handleDelete(data._id)}
                     >
                      Delete
                     </DropdownItem>

@@ -16,40 +16,9 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import login from "context/actions/auth/login";
-import { GlobalContext } from "context/provider"
+
 const Login = () => {
 
-  const [form, setForm] = useState({});
-
-  const history = useHistory();
-
-  const {
-    authDispatch,
-    authState: {
-      auth: { loading, error, data },
-    },
-  } = useContext(GlobalContext);
-
-
-  const onChange =(event) => {
-   
-    setForm({ ...form, [event.target.name]: event.target.value });
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault()
-    // register(form)(authDispatch);
-
-    login(form)(authDispatch);
-  };
-  useEffect(() => {
-    if (data) {
-      if (data.user) {
-        history.push("/");
-      }
-    }
-  }, [data]);
 
 
 
@@ -72,10 +41,10 @@ const Login = () => {
                   <Input
                     placeholder="Email"
                     type="email"
-                    onChange={onChange}
+                    // onChange={onChange}
                     autoComplete="new-email"
                     name="email"
-                    value={form.email}
+                    // value={form.email}
                   />
                 </InputGroup>
               </FormGroup>
@@ -91,8 +60,8 @@ const Login = () => {
                     type="password"
                     autoComplete="new-password"
                     name="password"
-                    value={form.password}
-                    onChange={onChange}
+                    // value={form.password}
+                    // onChange={onChange}
                   />
                 </InputGroup>
               </FormGroup>
@@ -112,7 +81,7 @@ const Login = () => {
               </div>
               <div className="text-center">
                 <Button className="my-4" color="primary" 
-                 onClick={onSubmit}
+                //  onClick={onSubmit}
                 type="submit">
                   Sign in
                 </Button>

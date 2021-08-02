@@ -19,18 +19,17 @@ import {
   Container,
   Media,
 } from "reactstrap";
-import logout from "context/actions/logout";
-import { GlobalContext } from "context/provider";
+
 import { isAuthenticated } from "auth/auth";
 
 const AdminNavbar = (props) => {
   const history = useHistory();
 
-  const { authDispatch: dispatch } = useContext(GlobalContext);
+
 const user=isAuthenticated().user
   const handleUserLogout = (e) => {
     e.preventDefault()
-    logout(history)(dispatch);
+    
   }; 
   return (
     <>

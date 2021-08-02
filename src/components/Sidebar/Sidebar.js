@@ -28,19 +28,17 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import logout from "context/actions/logout";
-import { GlobalContext } from "context/provider";
+
+
 
 
 
 const Sidebar = (props) => {
-  const history = useHistory();
-  const { authDispatch: dispatch } = useContext(GlobalContext);
-
+ 
   const handleUserLogout = (e) => {
     e.preventDefault()
-    logout(history)(dispatch);
-  };
+    
+  }; 
   const [collapseOpen, setCollapseOpen] = useState();
   // verifies if routeName is the one active (in browser input)
   const activeRoute = (routeName) => {
