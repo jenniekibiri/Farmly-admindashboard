@@ -1,4 +1,4 @@
-import React, { createContext, useReducer,useEffect } from "react";
+import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 import driverReducer from "./driverReducer";
 import farmerReducer from "./farrmerReducer";

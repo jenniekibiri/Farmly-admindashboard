@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import { useHistory} from "react-router-dom";
@@ -29,7 +29,8 @@ const AdminNavbar = (props) => {
 const user=isAuthenticated().user
   const handleUserLogout = (e) => {
     e.preventDefault()
-    
+    localStorage.removeItem("user");
+    history.push('/auth/login')
   }; 
   return (
     <>

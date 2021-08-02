@@ -1,6 +1,6 @@
 
 /*eslint-disable*/
-import React, { useState,useContext } from "react";
+import React, { useState} from "react";
 import { NavLink as NavLinkRRD, Link } from "react-router-dom";
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
@@ -35,9 +35,14 @@ import {
 
 const Sidebar = (props) => {
  
+  const history = useHistory();
+
+
+
   const handleUserLogout = (e) => {
     e.preventDefault()
-    
+    localStorage.removeItem("user");
+    history.push('/auth/login')
   }; 
   const [collapseOpen, setCollapseOpen] = useState();
   // verifies if routeName is the one active (in browser input)

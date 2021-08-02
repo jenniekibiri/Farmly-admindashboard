@@ -36,8 +36,6 @@ const Profile = () => {
     });
     
   }, [])
-  // console.log(state.users.firstName)
-
 
 
 
