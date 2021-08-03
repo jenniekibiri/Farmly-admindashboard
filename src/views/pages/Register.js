@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -51,7 +51,6 @@ const Register = () => {
       })
       .then((response) => {
         console.log(response);
-        
       })
       .catch((error) => {
         console.log(error);
@@ -69,7 +68,6 @@ const Register = () => {
     <>
       <Col lg="6" md="8">
         <Card className="bg-secondary shadow border-0">
-          
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
               <small>Register</small>
@@ -82,10 +80,12 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Firstname" type="text"
-                       name="firstName"
-                       value={state.firstName}
-                       onChange={onChange}
+                  <Input
+                    placeholder="Firstname"
+                    type="text"
+                    name="firstName"
+                    value={state.firstName}
+                    onChange={onChange}
                   />
                 </InputGroup>
               </FormGroup>
@@ -96,11 +96,13 @@ const Register = () => {
                       <i className="ni ni-hat-3" />
                     </InputGroupText>
                   </InputGroupAddon>
-                  <Input placeholder="Lastname" type="text"
-                      name="lastName"
-                      value={state.lastName}
-                      onChange={onChange}
-                   />
+                  <Input
+                    placeholder="Lastname"
+                    type="text"
+                    name="lastName"
+                    value={state.lastName}
+                    onChange={onChange}
+                  />
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -111,12 +113,12 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                     placeholder="Email"
-                     type="email"
-                     onChange={onChange}
-                     autoComplete="new-email"
-                     name="email"
-                     value={state.email}
+                    placeholder="Email"
+                    type="email"
+                    onChange={onChange}
+                    autoComplete="new-email"
+                    name="email"
+                    value={state.email}
                   />
                 </InputGroup>
               </FormGroup>
@@ -128,7 +130,8 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                    placeholder="phone" type="text"
+                    placeholder="phone"
+                    type="text"
                     name="phone"
                     value={state.phone}
                     onChange={onChange}
@@ -143,10 +146,11 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                   placeholder="address" type="text"
-                   name="address"
-                   value={state.address}
-                   onChange={onChange}
+                    placeholder="address"
+                    type="text"
+                    name="address"
+                    value={state.address}
+                    onChange={onChange}
                   />
                 </InputGroup>
               </FormGroup>
@@ -158,10 +162,11 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-                   placeholder="role" type="text"
-                   name="role"
-                   value={state.role}
-                   onChange={onChange}
+                    placeholder="role"
+                    type="text"
+                    name="role"
+                    value={state.role}
+                    onChange={onChange}
                   />
                 </InputGroup>
               </FormGroup>
@@ -173,22 +178,38 @@ const Register = () => {
                     </InputGroupText>
                   </InputGroupAddon>
                   <Input
-              placeholder="Password"
-              type="password"
-              autoComplete="new-password"
-              name="password"
-              value={state.password}
-              onChange={onChange}
+                    placeholder="Password"
+                    type="password"
+                    autoComplete="new-password"
+                    name="password"
+                    value={state.password}
+                    onChange={onChange}
                   />
                 </InputGroup>
               </FormGroup>
-              <div className="text-muted font-italic">
+              <Row className="my-4">
+                <Col xs="7">
+                  <div className="custom-control custom-control-alternative custom-checkbox">
+                  <div className="text-muted font-italic">
                 <small>
                   password strength:{" "}
                   <span className="text-success font-weight-700">strong</span>
                 </small>
               </div>
-              
+                      
+                  </div>
+                </Col>
+                <Col xs="5">
+                  <div className="custom-control custom-control-alternative custom-checkbox">
+                  <Link to='/auth/login'>
+                    <small > Have an account?</small>
+                  </Link>
+                      
+                  </div>
+                </Col>
+              </Row>
+            
+
               <Row className="my-4">
                 <Col xs="12">
                   <div className="custom-control custom-control-alternative custom-checkbox">
@@ -212,7 +233,12 @@ const Register = () => {
                 </Col>
               </Row>
               <div className="text-center">
-                <Button className="mt-4" color="primary" onClick={onSubmit} type="submit">
+                <Button
+                  className="mt-4"
+                  color="primary"
+                  onClick={onSubmit}
+                  type="submit"
+                >
                   Create account
                 </Button>
               </div>

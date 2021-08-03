@@ -1,6 +1,6 @@
 
 import React,{ useState, useContext,useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -134,13 +134,11 @@ const Login = () => {
             </a>
           </Col>
           <Col className="text-right" xs="6">
-            <a
-              className="text-light"
-              href="#pablo"
-              onClick={(e) => e.preventDefault()}
-            >
-              <small>Create new account</small>
-            </a>
+            
+          <Link to='/auth/register'>
+          <small>Create new account</small>
+                  </Link>
+          
           </Col>
         </Row>
       </Col>
