@@ -3,6 +3,7 @@ import React from "react";
 import { isAuthenticated } from "auth/auth";
 // reactstrap components
 import { Button, Container, Row, Col } from "reactstrap";
+import capitalize from "helpers";
 
 const UserHeader = () => {
 
@@ -26,10 +27,9 @@ const UserHeader = () => {
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="7" md="10">
-              <h1 className="display-2 text-white">Hello {isAuthenticated().user.firstName}</h1>
+              <h5 className="display-2 text-white">Hello {capitalize(isAuthenticated().user.firstName)}</h5>
               <p className="text-white mt-0 mb-5">
-                This is your profile page. You can see the progress you've made
-                with your work and manage your projects or assigned tasks
+                This is your profile page. You can view your personal information and or update the information.
               </p>
               <Button
                 color="info"

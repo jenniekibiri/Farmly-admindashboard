@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import axios from 'axios'
-import UsersComponent from "./TicketsComponent ";
+import UsersComponent from "./UsersComponent ";
 import generatePDF from "reportGenerator";
 
 const UsersReport = () => {

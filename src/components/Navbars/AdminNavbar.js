@@ -21,6 +21,7 @@ import {
 } from "reactstrap";
 
 import { isAuthenticated } from "auth/auth";
+import capitalize from "helpers";
 
 const AdminNavbar = (props) => {
   const history = useHistory();
@@ -69,7 +70,7 @@ const user=isAuthenticated().user
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      {user.firstName} {user.lastName}
+                      {capitalize(user.firstName)} {capitalize(user.lastName)}
                     </span>
                   </Media>
                 </Media>

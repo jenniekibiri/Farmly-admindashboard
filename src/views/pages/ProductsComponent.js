@@ -1,19 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+
 
 const ProductsComponent  = ({ products }) => {
 console.log(products)
 // a function that assigns bootstrap styling classes based on 
 // the status of the ticket
-  const assignColorToTicketStatus = ticket => {
-    if (ticket.status === "completed") {
-      return "p-3 mb-2 bg-success text-white";
-    } else if (ticket.status === "in_progress") {
-      return "p-3 mb-2 bg-warning text-dark";
-    } else if (ticket.status === "opened") {
-      return "p-3 mb-2 bg-light text-dark";
-    }
-  };
+
   return (
     <div className="container">
       {products.length === 0 ? (
@@ -35,11 +27,11 @@ console.log(products)
                 <td>{ticket._id}</td>
                 <td>{ticket.productName}</td>
                 <td>{ticket.quantity}</td>
-                <td className={assignColorToTicketStatus(ticket)}>
+                <td >
                   {ticket.price}
                 </td>
                 <td>
-                  <Link to={`/ticket/${ticket._id}`}>See comments</Link>
+                  
                 </td>
               </tr>
             ))}

@@ -10,7 +10,7 @@ const generatePDF = tickets => {
   const doc = new jsPDF();
 
   // define the columns we want and their titles
-  const tableColumn = ["Id", "name", "email", "phone", "Closed on"];
+  const tableColumn = ["Id", "Name", "Email", "Phone", "CreatedOn"];
   // define an empty array of rows
   const tableRows = [];
 

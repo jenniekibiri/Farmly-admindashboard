@@ -16,6 +16,7 @@ import {
 import UserHeader from "components/Headers/UserHeader.js";
 import { isAuthenticated } from "auth/auth";
 import { getUserById } from "api/apiuser";
+import capitalize from "helpers";
 
 
 const Profile = () => {
@@ -68,20 +69,18 @@ const Profile = () => {
                   <Button
                     className="mr-4"
                     color="info"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+              
                     size="sm"
                   >
-                    Connect
+                    
                   </Button>
                   <Button
                     className="float-right"
                     color="default"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
+                    
                     size="sm"
                   >
-                    Message
+                    
                   </Button>
                 </div>
               </CardHeader>
@@ -89,47 +88,31 @@ const Profile = () => {
                 <Row>
                   <div className="col">
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                      <div>
-                        <span className="heading">22</span>
-                        <span className="description">Friends</span>
-                      </div>
-                      <div>
-                        <span className="heading">10</span>
-                        <span className="description">Photos</span>
-                      </div>
-                      <div>
-                        <span className="heading">89</span>
-                        <span className="description">Comments</span>
-                      </div>
+                    
                     </div>
                   </div>
                 </Row>
                 <div className="text-center">
                   <h3>
-                   {isAuthenticated().user.firstName}
-                    <span className="font-weight-light">, 27</span>
+                    
+                   {capitalize(isAuthenticated().user.firstName)} {" "}
+                   {capitalize(isAuthenticated().user.lastName)}
                   </h3>
                   <div className="h5 font-weight-300">
                     <i className="ni location_pin mr-2" />
-                    Bucharest, Romania
+                    {isAuthenticated().user.email}
                   </div>
                   <div className="h5 mt-4">
-                    <i className="ni business_briefcase-24 mr-2" />
-                    Solution Manager - Creative Tim Officer
+                    <i className="ni ni-briefcase-24 mr-2" />
+                    { capitalize(isAuthenticated().user.role)}
                   </div>
-                  <div>
-                    <i className="ni education_hat mr-2" />
-                    University of Computer Science
+                  <div className=" mt-4">
+                    <i className="ni ni-education_hat mr-2" />
+                   Incharge of activity monitoring and product management
                   </div>
-                  <hr className="my-4" />
-                  <p>
-                    Ryan — the name taken by Melbourne-raised, Brooklyn-based
-                    Nick Murphy — writes, performs and records all of his own
-                    music.
-                  </p>
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    Show more
-                  </a>
+                 
+                
+                
                 </div>
               </CardBody>
             </Card>
@@ -271,7 +254,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="New York"
+                            defaultValue="Nyeri"
                             id="input-city"
                             placeholder="City"
                             type="text"
@@ -288,7 +271,7 @@ const Profile = () => {
                           </label>
                           <Input
                             className="form-control-alternative"
-                            defaultValue="United States"
+                            defaultValue="Kenya"
                             id="input-country"
                             placeholder="Country"
                             type="text"
@@ -306,6 +289,7 @@ const Profile = () => {
                           <Input
                             className="form-control-alternative"
                             id="input-postal-code"
+                            defaultValue="10100"
                             placeholder="Postal code"
                             type="number"
                           />
@@ -323,8 +307,7 @@ const Profile = () => {
                         className="form-control-alternative"
                         placeholder="A few words about you ..."
                         rows="4"
-                        defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                        Open Source."
+                     
                         type="textarea"
                       />
                     </FormGroup>
