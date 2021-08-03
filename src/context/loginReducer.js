@@ -1,7 +1,6 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
-   console.log(state)
-   console.log(action.payload)
+   
     switch (action.type) {
        
      
@@ -10,9 +9,10 @@ export default (state, action) => {
             ...state,
             user: {
 ...state.user,
-data:action.payload
+data:action.payload.user
                 
             },
+          
           };
       default:
         return state;

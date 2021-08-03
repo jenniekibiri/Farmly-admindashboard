@@ -22,7 +22,7 @@ import axios from "axios";
 import { GlobalContext } from "context/globalState";
 import { isAuthenticated } from "auth/auth";
 const ProductTables = () => {
-    const { getProducts, products,deleteProduct } = useContext(GlobalContext);
+    const { getProducts , products,deleteProduct } = useContext(GlobalContext);
 
     useEffect(() => {
       axios

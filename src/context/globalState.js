@@ -24,8 +24,8 @@ const buyerInitialState = {
   buyers: [],
 };
  const logInInitialState ={
-   user:JSON.parse(localStorage.getItem("user"))  || []
- }
+   user:JSON.parse(localStorage.getItem("user"))  || [],
+    }
  const registerInitialState ={
    newUser:[]
 }
@@ -63,7 +63,7 @@ export const GlobalProvider = ({ children }) => {
     buyerInitialState,
   );
 
-  
+
 
   // Actions
   function deleteCategory(categoryId) {

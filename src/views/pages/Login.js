@@ -1,5 +1,4 @@
-
-import React,{ useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 // reactstrap components
@@ -10,6 +9,7 @@ import {
   FormGroup,
   Form,
   Input,
+  FormText,
   InputGroupAddon,
   InputGroupText,
   InputGroup,
@@ -19,52 +19,55 @@ import {
 import { GlobalContext } from "context/globalState";
 import axios from "axios";
 const Login = () => {
-  const history = useHistory()
-  const { login,user } =  useContext(GlobalContext);
+  const history = useHistory();
+  const { login, user, error } = useContext(GlobalContext);
+
   const [state, setstate] = useState([]);
   const onChange = (event) => {
     setstate({ ...state, [event.target.name]: event.target.value });
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    const newUser = {
-      email: state.email,
-      password:state.password
-    };
-    login(newUser);
+
     axios
       .post(`http://localhost:5000/api/login`, {
         email: state.email,
-        password:state.password
-
-        //   Authorization: `Bearer ${token}`,
+        password: state.password,
       })
       .then((response) => {
-        console.log(response)
-        localStorage.setItem("user", JSON.stringify(response.data))
-        
+        if (response.data.message) {
+          setstate((prevState) => ({
+            ...prevState,
+            message: response.data.message,
+          }));
+
+          const newUser = {
+            email: state.email,
+            password: state.password,
+          };
+
+          login(newUser);
+        } else {
+          localStorage.setItem("user", JSON.stringify(response.data));
+          history.push("/admin/index");
+        }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
       });
   };
-
-  useEffect(() => {
-    if (user) {
-      if (user.data) {
-        history.push("/admin/index");
-      }
-    }
-  }, [user]);
 
   return (
     <>
       <Col lg="5" md="7">
         <Card className="bg-secondary shadow border-0">
-          
           <CardBody className="px-lg-5 py-lg-5">
-           
             <Form role="form">
+              {
+                <FormText className="text-red">
+                  {state.message && state.message}
+                </FormText>
+              }
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -79,6 +82,7 @@ const Login = () => {
                     autoComplete="new-email"
                     name="email"
                     value={state.email}
+                    required="required"
                   />
                 </InputGroup>
               </FormGroup>
@@ -96,6 +100,7 @@ const Login = () => {
                     name="password"
                     value={state.password}
                     onChange={onChange}
+                    required
                   />
                 </InputGroup>
               </FormGroup>
@@ -104,7 +109,6 @@ const Login = () => {
                   className="custom-control-input"
                   id=" customCheckLogin"
                   type="checkbox"
-                 
                 />
                 <label
                   className="custom-control-label"
@@ -114,9 +118,12 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" 
-                 onClick={onSubmit}
-                type="submit">
+                <Button
+                  className="my-4"
+                  color="primary"
+                  onClick={onSubmit}
+                  type="submit"
+                >
                   Sign in
                 </Button>
               </div>
@@ -134,11 +141,9 @@ const Login = () => {
             </a>
           </Col>
           <Col className="text-right" xs="6">
-            
-          <Link to='/auth/register'>
-          <small>Create new account</small>
-                  </Link>
-          
+            <Link to="/auth/register">
+              <small>Create new account</small>
+            </Link>
           </Col>
         </Row>
       </Col>
