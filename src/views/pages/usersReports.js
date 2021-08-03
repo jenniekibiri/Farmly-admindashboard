@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from "react";
 
 import axios from 'axios'
-import ProductsComponent from "./ProductsComponent";
-import generatePDF from "productReportGenerator";
+import UsersComponent from "./TicketsComponent ";
+import generatePDF from "reportGenerator";
 
-const ProductsReport = () => {
+const UsersReport = () => {
   
-  const [products, setProducts] = useState([]);
+  const [users, setUsers] = useState([]);
   
 
   useEffect(() => {
-    const getAllProducts = async () => {
+    const getAllUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/products");
-        setProducts(response.data);
+        const response = await axios.get("http://localhost:5000/api/users");
+        setUsers(response.data);
       } catch (err) {
         console.log("error");
       }
     };
-    getAllProducts();
+    getAllUsers();
   }, []);
 
-const reportProducts = products
+const reportUsers = users
 // tickets.filter(ticket => ticket.status === "completed");
   
   return (
@@ -32,25 +32,25 @@ const reportProducts = products
         <button
               className="btn btn-primary"
               type='button'
-              onClick={() => generatePDF(reportProducts)}
+              onClick={() => generatePDF(reportUsers)}
             >
               Generate monthly report
             </button>
-          {reportProducts ? (
+          {reportUsers ? (
             <> </>
           ) : (
             <button
               className="btn btn-primary"
-              onClick={() => generatePDF(reportProducts)}
+              onClick={() => generatePDF(reportUsers)}
             >
               Generate monthly report
             </button>
           )}
         </div>
       </div>
-      <ProductsComponent products={products} />
+      <UsersComponent users={users} />
     </div>
   );
 };
 
-export default ProductsReport;
+export default UsersReport;

@@ -18,6 +18,7 @@ import {
 } from "reactstrap";
 
 const Register = () => {
+  
   return (
     <>
       <Col lg="6" md="8">

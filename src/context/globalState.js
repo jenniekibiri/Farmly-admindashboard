@@ -5,6 +5,7 @@ import driverReducer from "./driverReducer";
 import farmerReducer from "./farrmerReducer";
 import loginReducer from "./loginReducer";
 import productReducer from "./productReducer";
+import registerReducer from "./registerReducer";
 
 // Initial state
 const categoryInitialState = {
@@ -25,6 +26,9 @@ const buyerInitialState = {
  const logInInitialState ={
    user:JSON.parse(localStorage.getItem("user"))  || []
  }
+ const registerInitialState ={
+   newUser:[]
+}
 // Create context
 export const GlobalContext = createContext({});
 
@@ -49,6 +53,10 @@ export const GlobalProvider = ({ children }) => {
   const [loginState, loginDispatch] = useReducer(
     loginReducer,
     logInInitialState,
+  );
+  const [registerState, registerDispatch] = useReducer(
+    registerReducer,
+    registerInitialState,
   );
   const [buyerState, buyerDispatch] = useReducer(
    buyerReducer,
@@ -107,10 +115,16 @@ export const GlobalProvider = ({ children }) => {
       type: "ADD_CATEGORY",
       payload: category,
     });
-  } function login(user) {
+  } 
+  function login(user) {
     loginDispatch({
       type: "LOGIN",
       payload: user,
+    });
+  }function register(newUser) {
+    registerDispatch({
+      type: "REGISTER",
+      payload: newUser,
     });
   }
   function getCategories(categories) {
@@ -151,6 +165,7 @@ export const GlobalProvider = ({ children }) => {
         drivers: driverState.drivers,
         farmers:farmerState.farmers,
         user:loginState.user,
+        newUser:registerState.newUser,
         products:productState.products,
         buyers:buyerState.buyers,
         getProducts,
@@ -164,6 +179,7 @@ export const GlobalProvider = ({ children }) => {
         getDrivers,
         deleteDriver,
         getFarmers,
+        register,
         login
       }}
     >
