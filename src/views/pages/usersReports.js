@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import axios from 'axios'
 import ProductsComponent from "./ProductsComponent";
-import generatePDF from "reportGenerator";
+import generatePDF from "productReportGenerator";
 
 const ProductsReport = () => {
   

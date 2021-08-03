@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ProductsComponent  = ({ products }) => {
-
+console.log(products)
 // a function that assigns bootstrap styling classes based on 
 // the status of the ticket
   const assignColorToTicketStatus = ticket => {
