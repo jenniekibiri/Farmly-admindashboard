@@ -4,7 +4,6 @@ import axios from 'axios'
 import UsersComponent from "./TicketsComponent ";
 import generatePDF from "reportGenerator";
 
-
 const UsersReport = () => {
   
   const [users, setUsers] = useState([]);

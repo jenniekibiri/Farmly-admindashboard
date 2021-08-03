@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
+  console.log(state.products)
     switch (action.type) {
       case "DELETE_PRODUCT":
         return {
@@ -10,6 +11,7 @@ export default (state, action) => {
         };
      
       case "GET_PRODUCTS":
+      
         return {
           ...state,
           products: [...action.payload, ...state.products],

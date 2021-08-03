@@ -29,10 +29,6 @@ import {
   Col,
 } from "reactstrap";
 
-
-
-
-
 const Sidebar = (props) => {
  
   const history = useHistory();

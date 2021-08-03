@@ -130,7 +130,7 @@ export const GlobalProvider = ({ children }) => {
         farmers:farmerState.farmers,
         user:loginState.user,
         products:productState.products,
-        profile:
+        
         getProducts,
         deleteProduct,
         deleteCategory,

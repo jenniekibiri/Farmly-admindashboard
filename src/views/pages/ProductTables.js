@@ -32,6 +32,7 @@ const ProductTables = () => {
           },
         })
         .then((response) => {
+          console.log(response)
           getProducts(response.data);
         })
         .catch((error) => {
