@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
+import buyerReducer from "./buyerReducer";
 import driverReducer from "./driverReducer";
 import farmerReducer from "./farrmerReducer";
 import loginReducer from "./loginReducer";
@@ -17,6 +18,9 @@ const farmerInitialState = {
 };
 const productInitialState = {
   products: [],
+};
+const buyerInitialState = {
+  buyers: [],
 };
  const logInInitialState ={
    user:JSON.parse(localStorage.getItem("user"))  || []
@@ -46,6 +50,10 @@ export const GlobalProvider = ({ children }) => {
     loginReducer,
     logInInitialState,
   );
+  const [buyerState, buyerDispatch] = useReducer(
+   buyerReducer,
+    buyerInitialState,
+  );
 
   
 
@@ -73,6 +81,14 @@ export const GlobalProvider = ({ children }) => {
   function deleteDriver(userId) {
     driverDispatch({
       type: 'DELETE_DRIVER',
+      payload: {
+        userId:userId
+      }
+    });
+  }
+  function deleteBuyer(userId) {
+    buyerDispatch({
+      type: 'DELETE_BUYER',
       payload: {
         userId:userId
       }
@@ -121,6 +137,12 @@ export const GlobalProvider = ({ children }) => {
       payload: products,
     });
   }
+  function getBuyers(buyers){
+    buyerDispatch({
+      type:"GET_BUYERS",
+      payload:buyers
+    })
+  }
  
   return (
     <GlobalContext.Provider
@@ -130,10 +152,12 @@ export const GlobalProvider = ({ children }) => {
         farmers:farmerState.farmers,
         user:loginState.user,
         products:productState.products,
-        
+        buyers:buyerState.buyers,
         getProducts,
+        getBuyers,
         deleteProduct,
         deleteCategory,
+        deleteBuyer,
         addCategory,
         getCategories,
         deleteFarmer,
