@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-
+import axios from "axios";
 // reactstrap components
 import {
   Badge,
@@ -20,20 +20,44 @@ import {
 } from "reactstrap";
 // core components
 import Header from "components/Headers/Header.js";
-import getBuyers from "context/actions/buyer";
-import { GlobalContext } from "context/provider"
-const Buyers = () => {
 
-  const { buyerState, buyerDispatch } = useContext(GlobalContext);
-  const {
-    user: { data },
-  } = buyerState;
-  
-  useEffect(() => {
-    if (data.length === 0) {
-      getBuyers(buyerDispatch);
-    }
-  }, []);
+import { GlobalContext } from "context/globalState";
+
+const Buyers = () => {
+    const { getBuyers, buyers,deleteBuyer } = useContext(GlobalContext);
+
+    useEffect(() => {
+        axios
+          .get("http://localhost:5000/api/buyers", {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+            },
+          })
+          .then((response) => {
+            getBuyers(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }, []);
+      const handleDelete = (userId) => (e) => {
+          console.log(userId)
+        e.preventDefault();
+      
+        axios
+          .delete(`http://localhost:5000/api/user/${userId}`, {
+            headers: {},
+          })
+          .then((response) => {
+            //signout user
+            return response;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    
+          deleteBuyer(userId);
+      };
   return (
     <>
       <Header />
@@ -65,7 +89,7 @@ const Buyers = () => {
                 </thead>
                 <tbody>
                   {
-                   data.data&&data.data.map((user,i)=>(
+                   buyers.map((user,i)=>(
 
 <tr>
                     <th scope="row">
@@ -128,8 +152,8 @@ const Buyers = () => {
                             Edit
                           </DropdownItem>
                           <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            
+                            onClick={handleDelete(user._id)}
                           >
                            Delete
                           </DropdownItem>
