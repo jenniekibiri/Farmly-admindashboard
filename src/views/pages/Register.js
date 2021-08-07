@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-
+import axios from "axios";
 // reactstrap components
 import {
   Button,
@@ -18,7 +18,7 @@ import {
   Col,
 } from "reactstrap";
 import { GlobalContext } from "context/globalState";
-import axios from "axios";
+
 const Register = () => {
   const history = useHistory();
   const { register, newUser } = useContext(GlobalContext);
