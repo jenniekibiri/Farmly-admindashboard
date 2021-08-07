@@ -40,7 +40,7 @@ const Drivers = () => {
       });
   }, []);
   const handleDelete = (userId) => (e) => {
-      console.log(userId)
+      
     e.preventDefault();
   
     axios

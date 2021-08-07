@@ -1,4 +1,4 @@
-import React, { useContext, useEffect }  from "react";
+import React, { useContext, useEffect } from "react";
 // reactstrap components
 import {
   Card,
@@ -22,41 +22,39 @@ import axios from "axios";
 import { GlobalContext } from "context/globalState";
 import { isAuthenticated } from "auth/auth";
 const ProductTables = () => {
-    const { getProducts , products,deleteProduct } = useContext(GlobalContext);
+  const { getProducts, products, deleteProduct } = useContext(GlobalContext);
 
-    useEffect(() => {
-      axios
-        .get("http://localhost:5000/api/products", {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        })
-        .then((response) => {
-          console.log(response)
-          getProducts(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }, []);
-    const handleDelete = (productId) => (e) => {
-        console.log(productId)
-      e.preventDefault();
-      const userId = isAuthenticated().user._id;
-      axios
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/products", {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((response) => {
+        getProducts(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  const handleDelete = (productId) => (e) => {
+    e.preventDefault();
+    const userId = isAuthenticated().user._id;
+    axios
       .delete(`http://localhost:5000/api/product/${productId}/${userId}`, {
-          headers: {},
-        })
-        .then((response) => {
-          //signout user
-          return response;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-  
-        deleteProduct(productId);
-    };
+        headers: {},
+      })
+      .then((response) => {
+        //signout user
+        return response;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    deleteProduct(productId);
+  };
   return (
     <>
       <Header />
@@ -76,84 +74,73 @@ const ProductTables = () => {
                     <th scope="col">Description</th>
                     <th scope="col">Price</th>
                     <th scope="col">Quantity</th>
-                   
+
                     <th scope="col" />
                   </tr>
                 </thead>
                 <tbody>
-              { 
-            products.map((data,i)=>(
-              <tr>
-              <th scope="row">
-                <Media className="align-items-center">
-                  <a
-                    className="avatar rounded-circle mr-3"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <img
-                      alt="..."
-                      src={
-                        require("../../assets/img/theme/bootstrap.jpg")
-                          .default
-                      }
-                    />
-                  </a>
-                  <Media>
-                    <span className="mb-0 text-sm">
-                      {data.productName}
-                    </span>
-                  </Media>
-                </Media>
-              </th>
-              <td> {data.description.substring(0, 50)}...</td>
-             
-              <td>
-              {data.price} KSH
-              </td>
-              <td>
-                <div className="d-flex align-items-center">
-                  <span className="mr-2">{data.quantity} KG</span>
-                  
-                </div>
-              </td>
-              <td className="text-right">
-                <UncontrolledDropdown>
-                  <DropdownToggle
-                    className="btn-icon-only text-light"
-                    href="#pablo"
-                    role="button"
-                    size="sm"
-                    color=""
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    <i className="fas fa-ellipsis-v" />
-                  </DropdownToggle>
-                  <DropdownMenu className="dropdown-menu-arrow" right>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Edit
-                    </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={handleDelete(data._id)}
-                    >
-                     Delete
-                    </DropdownItem>
-                  
-                  </DropdownMenu>
-                </UncontrolledDropdown>
-              </td>
-            </tr>
-            )) 
-              
-             }
-                  
-                   
-                 
-                
+                  {products.map((data, i) => (
+                    <tr>
+                      <th scope="row">
+                        <Media className="align-items-center">
+                          <a
+                            className="avatar rounded-circle mr-3"
+                            href="#pablo"
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            <img
+                              alt="..."
+                              src={
+                                require("../../assets/img/theme/bootstrap.jpg")
+                                  .default
+                              }
+                            />
+                          </a>
+                          <Media>
+                            <span className="mb-0 text-sm">
+                              {data.productName}
+                            </span>
+                          </Media>
+                        </Media>
+                      </th>
+                      <td> {data.description.substring(0, 50)}...</td>
+
+                      <td>{data.price} KSH</td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <span className="mr-2">{data.quantity} KG</span>
+                        </div>
+                      </td>
+                      <td className="text-right">
+                        <UncontrolledDropdown>
+                          <DropdownToggle
+                            className="btn-icon-only text-light"
+                            href="#pablo"
+                            role="button"
+                            size="sm"
+                            color=""
+                            onClick={(e) => e.preventDefault()}
+                          >
+                            <i className="fas fa-ellipsis-v" />
+                          </DropdownToggle>
+                          <DropdownMenu className="dropdown-menu-arrow" right>
+                            <DropdownItem
+                              href="#pablo"
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              Edit
+                            </DropdownItem>
+                            <DropdownItem
+                              href="#pablo"
+                              onClick={handleDelete(data._id)}
+                            >
+                              Delete
+                            </DropdownItem>
+                          </DropdownMenu>
+                        </UncontrolledDropdown>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
               <CardFooter className="py-4">
@@ -212,7 +199,6 @@ const ProductTables = () => {
           </div>
         </Row>
         {/* Dark table */}
-        
       </Container>
     </>
   );

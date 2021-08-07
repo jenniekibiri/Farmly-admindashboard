@@ -24,47 +24,46 @@ import Header from "components/Headers/Header.js";
 import { GlobalContext } from "context/globalState";
 
 const Buyers = () => {
-    const { getBuyers, buyers,deleteBuyer } = useContext(GlobalContext);
+  const { getBuyers, buyers, deleteBuyer } = useContext(GlobalContext);
 
-    useEffect(() => {
-        axios
-          .get("http://localhost:5000/api/buyers", {
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-            },
-          })
-          .then((response) => {
-            getBuyers(response.data);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }, []);
-      const handleDelete = (userId) => (e) => {
-          console.log(userId)
-        e.preventDefault();
-      
-        axios
-          .delete(`http://localhost:5000/api/user/${userId}`, {
-            headers: {},
-          })
-          .then((response) => {
-            //signout user
-            return response;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-    
-          deleteBuyer(userId);
-      };
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/buyers", {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((response) => {
+        getBuyers(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  const handleDelete = (userId) => (e) => {
+    e.preventDefault();
+
+    axios
+      .delete(`http://localhost:5000/api/user/${userId}`, {
+        headers: {},
+      })
+      .then((response) => {
+        //signout user
+        return response;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    deleteBuyer(userId);
+  };
   return (
     <>
       <Header />
       {/* Page content */}
       <Container className="mt--7" fluid>
         {/* Table */}
-       
+
         {/* Dark table */}
         <Row className="mt-5">
           <div className="col">
@@ -78,92 +77,84 @@ const Buyers = () => {
               >
                 <thead className="thead-dark">
                   <tr>
-                  <th scope="col">Name</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Status</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Address</th>
-                    
+
                     <th scope="col" />
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                   buyers.map((user,i)=>(
-
-<tr>
-                    <th scope="row">
-                      <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/bootstrap.jpg")
-                                .default
-                            }
-                          />
-                        </a>
-                        <Media>
-                          <span className="mb-0 text-sm">
-                          {user.firstName} {user.lastName}
-                          </span>
-                        </Media>
-                      </Media>
-                    </th>
-                    <td>{user.email}</td>
-                    <td>
-                      <Badge color="" className="badge-dot mr-4">
-                        <i className="bg-warning" />
-                        pending
-                      </Badge>
-                    </td>
-                    <td>
-                      <div className="avatar-group">
-                       <td> {user.phone}</td>
-                      </div>
-                    </td>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <span className="mr-2">{user.address}</span>
-                        
-                      </div>
-                    </td>
-                    <td className="text-right">
-                      <UncontrolledDropdown>
-                        <DropdownToggle
-                          className="btn-icon-only text-light"
-                          href="#pablo"
-                          role="button"
-                          size="sm"
-                          color=""
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-ellipsis-v" />
-                        </DropdownToggle>
-                        <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
+                  {buyers.map((user, i) => (
+                    <tr>
+                      <th scope="row">
+                        <Media className="align-items-center">
+                          <a
+                            className="avatar rounded-circle mr-3"
                             href="#pablo"
                             onClick={(e) => e.preventDefault()}
                           >
-                            Edit
-                          </DropdownItem>
-                          <DropdownItem
-                            
-                            onClick={handleDelete(user._id)}
+                            <img
+                              alt="..."
+                              src={
+                                require("../../assets/img/theme/bootstrap.jpg")
+                                  .default
+                              }
+                            />
+                          </a>
+                          <Media>
+                            <span className="mb-0 text-sm">
+                              {user.firstName} {user.lastName}
+                            </span>
+                          </Media>
+                        </Media>
+                      </th>
+                      <td>{user.email}</td>
+                      <td>
+                        <Badge color="" className="badge-dot mr-4">
+                          <i className="bg-warning" />
+                          pending
+                        </Badge>
+                      </td>
+                      <td>
+                        <div className="avatar-group">
+                          <td> {user.phone}</td>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="d-flex align-items-center">
+                          <span className="mr-2">{user.address}</span>
+                        </div>
+                      </td>
+                      <td className="text-right">
+                        <UncontrolledDropdown>
+                          <DropdownToggle
+                            className="btn-icon-only text-light"
+                            href="#pablo"
+                            role="button"
+                            size="sm"
+                            color=""
+                            onClick={(e) => e.preventDefault()}
                           >
-                           Delete
-                          </DropdownItem>
-                         </DropdownMenu>
-                      </UncontrolledDropdown>
-                    </td>
-                  </tr>
-                   )) }
-                  
-                  
+                            <i className="fas fa-ellipsis-v" />
+                          </DropdownToggle>
+                          <DropdownMenu className="dropdown-menu-arrow" right>
+                            <DropdownItem
+                              href="#pablo"
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              Edit
+                            </DropdownItem>
+                            <DropdownItem onClick={handleDelete(user._id)}>
+                              Delete
+                            </DropdownItem>
+                          </DropdownMenu>
+                        </UncontrolledDropdown>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
               <CardFooter className="py-4 bg-transparent">
@@ -218,11 +209,9 @@ const Buyers = () => {
                   </Pagination>
                 </nav>
               </CardFooter>
-
             </Card>
           </div>
         </Row>
-       
       </Container>
     </>
   );

@@ -26,8 +26,6 @@ import { GlobalContext } from "context/globalState";
 const Farmers = () => {
   const { getFarmers, farmers, deleteFarmer } = useContext(GlobalContext);
 
- 
-
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/farmers", {
@@ -44,7 +42,6 @@ const Farmers = () => {
   }, []);
 
   const handleDelete = (userId) => (e) => {
-    console.log(userId);
     e.preventDefault();
 
     axios

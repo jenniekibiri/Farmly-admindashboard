@@ -51,8 +51,7 @@ const Register = () => {
         //   Authorization: `Bearer ${token}`,
       })
       .then((response) => {
-        console.log(response);
-      })
+              })
       .catch((error) => {
         console.log(error);
       });
