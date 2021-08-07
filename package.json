@@ -3,6 +3,10 @@
   "version": "1.2.0",
   "description": "React version of Argon Dashboard by Creative Tim",
   "main": "index.js",
+  "engines": {
+    "npm": "6.14.11",
+    "node": "14.16.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
