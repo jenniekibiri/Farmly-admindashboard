@@ -1,17 +1,18 @@
 export const  list = () => {
-    return  fetch(`http://localhost:5000/api/users`, {
+    return  fetch(`${process.env.REACT_APP_BACKENDAPI}/api/users`, {
           Method: "GET",
         })
-  }
+  } 
   export const  getUserById = (userId) => {
-    return  fetch(`http://localhost:5000/api/user/${userId}`, {
+
+    return  fetch(` ${process.env.REACT_APP_BACKENDAPI}/api/user/${userId}`, {
           Method: "GET",
         })
   }
   export const  deleteCategoryAPI = async (userId,token,categoryId) => {
 
     
-    return  fetch(`http://localhost:5000/api/category/${categoryId}/${userId}`, {
+    return  fetch(` ${process.env.REACT_APP_BACKENDAPI}/api/category/${categoryId}/${userId}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",

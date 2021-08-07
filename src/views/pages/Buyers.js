@@ -28,7 +28,7 @@ const Buyers = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/buyers", {
+      .get( `${process.env.REACT_APP_BACKENDAPI}/api/buyers`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -44,7 +44,7 @@ const Buyers = () => {
     e.preventDefault();
 
     axios
-      .delete(`http://localhost:5000/api/user/${userId}`, {
+      .delete( `${process.env.REACT_APP_BACKENDAPI}/api/user/${userId}`, {
         headers: {},
       })
       .then((response) => {

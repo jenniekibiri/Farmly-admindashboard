@@ -32,7 +32,7 @@ const Categories = () => {
   const [state, setstate] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/categories", {
+      .get(`${process.env.REACT_APP_BACKENDAPI}/api/categories`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -56,7 +56,7 @@ const Categories = () => {
     };
     addCategory(newCategory);
     axios
-      .post(`http://localhost:5000/api/category/create`, {
+      .post(`${process.env.REACT_APP_BACKENDAPI}/api/category/create`, {
         categoryName: state.categoryName,
         //   Authorization: `Bearer ${token}`,
       })
@@ -72,9 +72,9 @@ const Categories = () => {
     const userId = isAuthenticated().user._id;
   
     const token = isAuthenticated().token;
-   
+  
     axios
-      .delete(`http://localhost:5000/api/category/${categoryId}/${userId}`, {
+      .delete(`${process.env.REACT_APP_BACKENDAPI}/api/category/${categoryId}/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

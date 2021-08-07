@@ -25,8 +25,9 @@ const ProductTables = () => {
   const { getProducts, products, deleteProduct } = useContext(GlobalContext);
 
   useEffect(() => {
+    console.log(process.env)
     axios
-      .get("http://localhost:5000/api/products", {
+      .get(`${process.env.REACT_APP_BACKENDAPI}/api/products`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -42,7 +43,7 @@ const ProductTables = () => {
     e.preventDefault();
     const userId = isAuthenticated().user._id;
     axios
-      .delete(`http://localhost:5000/api/product/${productId}/${userId}`, {
+      .delete(`${process.env.REACT_APP_BACKENDAPI}/api/product/${productId}/${userId}`, {
         headers: {},
       })
       .then((response) => {

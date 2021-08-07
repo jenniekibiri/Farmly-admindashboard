@@ -40,7 +40,7 @@ const Register = () => {
     };
     register(user);
     axios
-      .post(`http://localhost:5000/api/register`, {
+      .post(`${process.env.REACT_APP_BACKENDAPI}/api/register`, {
         email: state.email,
         password: state.password,
         firstName: state.firstName,

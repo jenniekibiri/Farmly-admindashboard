@@ -27,7 +27,7 @@ const Drivers = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/drivers", {
+      .get(`${process.env.REACT_APP_BACKENDAPI}/api/drivers`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -44,7 +44,7 @@ const Drivers = () => {
     e.preventDefault();
   
     axios
-      .delete(`http://localhost:5000/api/user/${userId}`, {
+      .delete(`${process.env.REACT_APP_BACKENDAPI}/api/user/${userId}`, {
         headers: {},
       })
       .then((response) => {
