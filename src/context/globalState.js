@@ -4,12 +4,16 @@ import buyerReducer from "./buyerReducer";
 import driverReducer from "./driverReducer";
 import farmerReducer from "./farrmerReducer";
 import loginReducer from "./loginReducer";
+import orderReducer from "./orderReducer";
 import productReducer from "./productReducer";
 import registerReducer from "./registerReducer";
 
 // Initial state
 const categoryInitialState = {
   categories: [],
+};
+const orderInitialState = {
+  orders: [],
 };
 const driverInitialState = {
   drivers: [],
@@ -45,6 +49,10 @@ export const GlobalProvider = ({ children }) => {
   const [farmerState, farmerDispatch] = useReducer(
     farmerReducer,
     farmerInitialState
+  );
+  const [orderState, orderDispatch] = useReducer(
+    orderReducer,
+    orderInitialState
   );
   const [productState, productDispatch] = useReducer(
     productReducer,
@@ -97,6 +105,14 @@ export const GlobalProvider = ({ children }) => {
   function deleteBuyer(userId) {
     buyerDispatch({
       type: 'DELETE_BUYER',
+      payload: {
+        userId:userId
+      }
+    });
+  }
+  function deleteOrder(userId) {
+    orderDispatch({
+      type: 'DELETE_Order',
       payload: {
         userId:userId
       }
@@ -157,6 +173,12 @@ export const GlobalProvider = ({ children }) => {
       payload:buyers
     })
   }
+  function getOrders(orders){
+    orderDispatch({
+      type:"GET_ORDERS",
+      payload:orders
+    })
+  }
  
   return (
     <GlobalContext.Provider
@@ -168,6 +190,9 @@ export const GlobalProvider = ({ children }) => {
         newUser:registerState.newUser,
         products:productState.products,
         buyers:buyerState.buyers,
+        orders:orderState.orders,
+        getOrders,
+        deleteOrder,
         getProducts,
         getBuyers,
         deleteProduct,
