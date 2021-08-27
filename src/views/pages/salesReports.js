@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios'
 
 import SalesComponent from "./SalesComponent.js";
-import generatePDF from "reportGenerator";
+import generatePDF from "./salesReportGenerator.js";
 
 const SalesReport = () => {
   
