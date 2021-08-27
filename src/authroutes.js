@@ -1,7 +1,7 @@
 
 import Register from "views/pages/Register.js";
 import Login from "views/pages/Login.js";
-
+import Map from "views/pages/Map.js";
 
 
 var authRoutes = [
@@ -20,5 +20,6 @@ var authRoutes = [
     component: Register,
     layout: "/auth",
   },
+ 
 ];
 export default authRoutes;

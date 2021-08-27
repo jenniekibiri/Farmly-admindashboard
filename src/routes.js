@@ -1,7 +1,7 @@
 
 import Index from "views/Index.js";
 import Profile from "views/pages/Profile.js";
-import Maps from "views/pages/Maps.js";
+
 
 import ProductTables from "views/pages/ProductTables";
 import Categories  from "views/pages/Categories";
@@ -9,6 +9,8 @@ import Drivers from "views/pages/Drivers";
 import Buyers from "views/pages/Buyers";
 import Farmers from "views/pages/Farmers";
 import Orders from "views/pages/Orders";
+import MapComponent from "views/pages/Map.js";
+
 
 
 var routes = [
@@ -44,7 +46,13 @@ var routes = [
     component:Farmers,
     layout: "/admin",
   },
-  
+  {
+    path: "/planroutes",
+    name: "Plan routes",
+    icon: "ni ni-pin-3 text-orange",
+    component:MapComponent,
+    layout: "/admin",
+  },
   {
     path: "/buyers-tables",
     name: "Buyers",
@@ -67,13 +75,7 @@ var routes = [
     component:Orders ,
     layout: "/admin",
   },
-  {
-    path: "/planroutes",
-    name: "Plan routes",
-    icon: "ni ni-pin-3 text-orange",
-    component: Maps,
-    layout: "/admin",
-  },
+ 
   
   {
     path: "/user-profile",
