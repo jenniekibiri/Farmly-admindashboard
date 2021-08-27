@@ -10,8 +10,7 @@ import {
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Media,
-  Pagination,
+   Pagination,
   PaginationItem,
   PaginationLink,
   Table,
@@ -24,7 +23,7 @@ import Header from "components/Headers/Header.js";
 import { GlobalContext } from "context/globalState";
 
 const Orders = () => {
-  const { getOrders, orders, deleteOrder } = useContext(GlobalContext);
+  const { getOrders, orders } = useContext(GlobalContext);
 
   useEffect(() => {
     axios
@@ -90,15 +89,16 @@ const Orders = () => {
                 </thead>
                 <tbody>
                   {orders.map((order, i) => (
-                    <tr>
+                    <tr key={i}>
                       <th scope="row">{order._id}</th>
                       <td>{order.numOfItems}</td>
 
-                      <td> 
-                      {order.product.map((product, i) => {
-                          console.log(product.productName)
-                        return <p> {product.productName}</p>
-                      })}</td>
+                      <td>
+                        {order.product.map((product, i) => {
+                          console.log(product.productName);
+                          return <p key={i}> {product.productName}</p>;
+                        })}
+                      </td>
 
                       <td>
                         <Badge color="" className="badge-dot mr-4">

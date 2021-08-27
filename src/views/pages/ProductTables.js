@@ -82,7 +82,7 @@ const ProductTables = () => {
                 </thead>
                 <tbody>
                   {products.map((data, i) => (
-                    <tr>
+                    <tr key={i}>
                       <th scope="row">
                         <Media className="align-items-center">
                           <a

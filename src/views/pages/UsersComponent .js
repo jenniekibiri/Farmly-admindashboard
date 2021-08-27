@@ -31,6 +31,7 @@ const UsersComponent = ({ users }) => {
                 {user.role}
                 </td>
               </tr>
+              
             ))}
           </tbody>
         </table>
