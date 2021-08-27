@@ -25,7 +25,8 @@ const ProductTables = () => {
   const { getProducts, products, deleteProduct } = useContext(GlobalContext);
 
   useEffect(() => {
-    console.log(process.env)
+
+  
     axios
       .get(`${process.env.REACT_APP_BACKENDAPI}/api/products`, {
         headers: {

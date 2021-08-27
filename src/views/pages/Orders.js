@@ -24,11 +24,11 @@ import Header from "components/Headers/Header.js";
 import { GlobalContext } from "context/globalState";
 
 const Orders = () => {
-  const { getOrders, orders, deleteOrder} = useContext(GlobalContext);
+  const { getOrders, orders, deleteOrder } = useContext(GlobalContext);
 
   useEffect(() => {
     axios
-      .get( `${process.env.REACT_APP_BACKENDAPI}/api/order/list`, {
+      .get(`${process.env.REACT_APP_BACKENDAPI}/api/order/list`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -40,23 +40,24 @@ const Orders = () => {
         console.log(error);
       });
   }, []);
-//   const handleDelete = (userId) => (e) => {
-//     e.preventDefault();
+  console.log(orders);
+  //   const handleDelete = (orderId) => (e) => {
+  //     e.preventDefault();
 
-//     axios
-//       .delete( `${process.env.REACT_APP_BACKENDAPI}/api/user/${userId}`, {
-//         headers: {},
-//       })
-//       .then((response) => {
-//         //signout user
-//         return response;
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
+  //     axios
+  //       .delete( `${process.env.REACT_APP_BACKENDAPI}/api/order/${orderId}`, {
+  //         headers: {},
+  //       })
+  //       .then((response) => {
+  //         //signout order
+  //         return response;
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
 
-//     deleteBuyer(userId);
-//   };
+  //     deleteBuyer(orderId);
+  //   };
   return (
     <>
       <Header />
@@ -77,57 +78,43 @@ const Orders = () => {
               >
                 <thead className="thead-dark">
                   <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Phone</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">NumOf items</th>
+                    <th scope="col">Products</th>
+                    <th scope="col">Order By</th>
+                    <th scope="col">status</th>
                     <th scope="col">Address</th>
 
                     <th scope="col" />
                   </tr>
                 </thead>
                 <tbody>
-                  {orders.map((user, i) => (
+                  {orders.map((order, i) => (
                     <tr>
-                      <th scope="row">
-                        <Media className="align-items-center">
-                          <a
-                            className="avatar rounded-circle mr-3"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <img
-                              alt="..."
-                              src={
-                                require("../../assets/img/theme/bootstrap.jpg")
-                                  .default
-                              }
-                            />
-                          </a>
-                          <Media>
-                            <span className="mb-0 text-sm">
-                              {user.firstName} {user.lastName}
-                            </span>
-                          </Media>
-                        </Media>
-                      </th>
-                      <td>{user.email}</td>
+                      <th scope="row">{order._id}</th>
+                      <td>{order.numOfItems}</td>
+
+                      <td> 
+                      {order.product.map((product, i) => {
+                          console.log(product.productName)
+                        return <p> {product.productName}</p>
+                      })}</td>
+
                       <td>
                         <Badge color="" className="badge-dot mr-4">
                           <i className="bg-warning" />
-                          pending
+                          {order.status}
                         </Badge>
                       </td>
-                      <td>
-                        <div className="avatar-group">
-                          <td> {user.phone}</td>
-                        </div>
-                      </td>
+
                       <td>
                         <div className="d-flex align-items-center">
-                          <span className="mr-2">{user.address}</span>
+                          <span className="mr-2">{order.user.email}</span>
                         </div>
                       </td>
+
+                      <td> {order.shippingAddress}</td>
+
                       <td className="text-right">
                         <UncontrolledDropdown>
                           <DropdownToggle
@@ -147,8 +134,8 @@ const Orders = () => {
                             >
                               Edit
                             </DropdownItem>
-                            <DropdownItem >
-                            {/* onClick={handleDelete(user._id)} */}
+                            <DropdownItem>
+                              {/* onClick={handleDelete(order._id)} */}
                               Delete
                             </DropdownItem>
                           </DropdownMenu>

@@ -8,6 +8,7 @@ import Categories  from "views/pages/Categories";
 import Drivers from "views/pages/Drivers";
 import Buyers from "views/pages/Buyers";
 import Farmers from "views/pages/Farmers";
+import Orders from "views/pages/Orders";
 
 
 var routes = [
@@ -57,6 +58,13 @@ var routes = [
     name: "Drivers",
     icon: "fa fa-truck text-red",
     component:Drivers ,
+    layout: "/admin",
+  },
+  {
+    path: "/orders-tables",
+    name: "Orders",
+    icon: "fa fa-gift text-red",
+    component:Orders ,
     layout: "/admin",
   },
   {

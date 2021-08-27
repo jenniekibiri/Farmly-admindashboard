@@ -1,14 +1,16 @@
 
 import { list } from "api/apiuser";
-import React, { useEffect,useState } from "react";
+import React, { useEffect,useState,useContext } from "react";
 
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
-
+import { GlobalContext } from "context/globalState";
 const Header = () => {
+  const {  orders } = useContext(GlobalContext);
   const [state, setstate] = useState([]);
 useEffect(() => {
-  list()
+ 
+   list()
   .then((response) => {
     return response.json();
   })
