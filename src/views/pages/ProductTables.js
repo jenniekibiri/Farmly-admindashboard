@@ -26,7 +26,6 @@ const ProductTables = () => {
 
   useEffect(() => {
 
-  
     axios
       .get(`${process.env.REACT_APP_BACKENDAPI}/api/products`, {
         headers: {

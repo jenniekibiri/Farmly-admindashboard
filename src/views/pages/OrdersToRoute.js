@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import axios from "axios";
 // reactstrap components
 import {
-  Badge,
   Card,
   CardHeader,
   CardFooter,
@@ -18,7 +17,6 @@ import {
   Row,
 } from "reactstrap";
 // core components
-import Header from "components/Headers/Header.js";
 
 import { GlobalContext } from "context/globalState";
 
@@ -59,8 +57,7 @@ const OrdersToRoute = () => {
   //   };
   return (
     <>
-      <Header />
-      {/* Page content */}
+    
       <Container className="mt--7" fluid>
         {/* Table */}
 
@@ -80,8 +77,7 @@ const OrdersToRoute = () => {
                     <th scope="col">Id</th>
                     <th scope="col">NumOf items</th>
                     <th scope="col">Products</th>
-                    <th scope="col">Order By</th>
-                    <th scope="col">status</th>
+                    
                     <th scope="col">Address</th>
 
                     <th scope="col" />
@@ -95,24 +91,13 @@ const OrdersToRoute = () => {
 
                       <td>
                         {order.product.map((product, i) => {
-                          console.log(product.productName);
-                          return <p key={i}> {product.productName}</p>;
+                        return <p key={i}> {product.productName}</p>;
                         })}
                       </td>
 
-                      <td>
-                        <Badge color="" className="badge-dot mr-4">
-                          <i className="bg-warning" />
-                          {order.status}
-                        </Badge>
-                      </td>
+                      
 
-                      <td>
-                        <div className="d-flex align-items-center">
-                          <span className="mr-2">{order.user.email}</span>
-                        </div>
-                      </td>
-
+                      
                       <td> {order.shippingAddress}</td>
 
                       <td className="text-right">
