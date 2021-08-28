@@ -4,9 +4,9 @@ import Routing from "./RoutingMachine.js";
 
 export default class LeafletMap extends Component {
   state = {
-    lat: 57.74,
-    lng: 11.94,
-    zoom: 12,
+    lat:0.4371,
+    lng: 36.95,
+    zoom: 13,
     isMapInit: false
   };
   saveMap = map => {
