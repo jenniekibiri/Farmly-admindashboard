@@ -6,7 +6,6 @@ import axios from "axios";
 import {
   Button,
   Card,
- 
   CardBody,
   FormGroup,
   Form,
@@ -50,8 +49,7 @@ const Register = () => {
         role: state.role,
         //   Authorization: `Bearer ${token}`,
       })
-      .then((response) => {
-              })
+      .then((response) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -163,11 +161,17 @@ const Register = () => {
                   </InputGroupAddon>
                   <Input
                     placeholder="role"
-                    type="text"
+                    type="select"
                     name="role"
                     value={state.role}
                     onChange={onChange}
-                  />
+                  >
+                    <option disabled  value="admin">role</option> 
+                    <option value="admin">admin</option>
+                    <option value="buyer">buyer</option>
+                    <option value="farmer">farmer</option>
+                    <option value="driver">driver</option>
+                  </Input>
                 </InputGroup>
               </FormGroup>
               <FormGroup>
@@ -190,25 +194,24 @@ const Register = () => {
               <Row className="my-4">
                 <Col xs="7">
                   <div className="custom-control custom-control-alternative custom-checkbox">
-                  <div className="text-muted font-italic">
-                <small>
-                  password strength:{" "}
-                  <span className="text-success font-weight-700">strong</span>
-                </small>
-              </div>
-                      
+                    <div className="text-muted font-italic">
+                      <small>
+                        password strength:{" "}
+                        <span className="text-success font-weight-700">
+                          strong
+                        </span>
+                      </small>
+                    </div>
                   </div>
                 </Col>
                 <Col xs="5">
                   <div className="custom-control custom-control-alternative custom-checkbox">
-                  <Link to='/auth/login'>
-                    <small > Have an account?</small>
-                  </Link>
-                      
+                    <Link to="/auth/login">
+                      <small> Have an account?</small>
+                    </Link>
                   </div>
                 </Col>
               </Row>
-            
 
               <Row className="my-4">
                 <Col xs="12">
