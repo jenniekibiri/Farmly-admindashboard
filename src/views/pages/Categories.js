@@ -112,7 +112,7 @@ const Categories = () => {
                           <input
                             type="text"
                             class="form-control"
-                            placeholder="Categoty Name"
+                            placeholder="Category Name"
                             aria-label="category"
                             name="categoryName"
                             value={state.categoryName}
