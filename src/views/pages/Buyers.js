@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect,useState } from "react";
 import axios from "axios";
 // reactstrap components
 import {
@@ -25,9 +25,12 @@ import { GlobalContext } from "context/globalState";
 
 const Buyers = () => {
   const { getBuyers, buyers, deleteBuyer } = useContext(GlobalContext);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    axios
+
+const fetchData=()=>{
+  setLoading(true);
+  axios
       .get( `${process.env.REACT_APP_BACKENDAPI}/api/buyers`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -35,10 +38,16 @@ const Buyers = () => {
       })
       .then((response) => {
         getBuyers(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
+}
+
+  useEffect(() => {
+    fetchData();
   }, []);
   const handleDelete = (userId) => (e) => {
     e.preventDefault();
@@ -91,19 +100,7 @@ const Buyers = () => {
                     <tr>
                       <th scope="row">
                         <Media className="align-items-center">
-                          <a
-                            className="avatar rounded-circle mr-3"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
-                            <img
-                              alt="..."
-                              src={
-                                require("../../assets/img/theme/bootstrap.jpg")
-                                  .default
-                              }
-                            />
-                          </a>
+                         
                           <Media>
                             <span className="mb-0 text-sm">
                               {user.firstName} {user.lastName}
