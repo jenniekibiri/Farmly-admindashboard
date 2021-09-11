@@ -13,7 +13,7 @@ export default (state, action) => {
         case "GET_DRIVERS":
           return {
             ...state,
-            drivers: [...action.payload, ...state.drivers],
+            drivers: [...action.payload],
           };
       default:
         return state;

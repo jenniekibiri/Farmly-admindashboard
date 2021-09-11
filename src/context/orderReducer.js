@@ -11,7 +11,7 @@ export default (state, action) => {
     case "GET_ORDERS":
       return {
         ...state,
-        orders: [...action.payload, ...state.orders],
+        orders: [...action.payload],
       };
     default:
       return state;

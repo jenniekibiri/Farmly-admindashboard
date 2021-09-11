@@ -87,20 +87,7 @@ const Drivers = () => {
                       <tr key={user._id}>
                         <th scope="row">
                           <Media className="align-items-center">
-                            {/* <a
-                          className="avatar rounded-circle mr-3"
-                          
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/bootstrap.jpg")
-                                .default
-                            }
-                          />
-                        </a> */}
-                            <Media>
+                                                      <Media>
                               <span className="mb-0 text-sm">
                                 {user.firstName} {user.lastName}
                               </span>

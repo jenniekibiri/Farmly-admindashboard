@@ -13,7 +13,7 @@ export default (state, action) => {
         case "GET_FARMERS":
           return {
             ...state,
-            farmers: [...action.payload, ...state.farmers],
+            farmers: [...action.payload],
           };
       default:
         return state;

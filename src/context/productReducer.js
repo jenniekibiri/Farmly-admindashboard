@@ -13,7 +13,7 @@ export default (state, action) => {
       
         return {
           ...state,
-          products: [...action.payload, ...state.products],
+          products: [...action.payload],
         };
       
       default:

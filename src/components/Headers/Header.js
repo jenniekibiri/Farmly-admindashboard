@@ -6,10 +6,10 @@ import axios from "axios";
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
 import { GlobalContext } from "context/globalState";
 const Header = () => {
-  const { getOrders, orders } = useContext(GlobalContext);
+  const { getOrders, orders,products,getProducts,getFarmers, farmers } = useContext(GlobalContext);
   const [state, setstate] = useState([]);
- 
 
+console.log(products)
 useEffect(() => {
  
    list()
@@ -36,6 +36,30 @@ useEffect(() => {
   .catch((error) => {
     console.log(error);
   });
+  axios
+  .get(`${process.env.REACT_APP_BACKENDAPI}/api/farmers`, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+  .then((response) => {
+    getFarmers(response.data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+  axios
+  .get(`${process.env.REACT_APP_BACKENDAPI}/api/products`, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+  .then((response) => {
+    getProducts(response.data);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
   
 }, []);
 
@@ -55,10 +79,10 @@ useEffect(() => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Traffic
+                          Farmers
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
-                          350,897
+                          {farmers.length}
                         </span>
                       </div>
                       <Col className="col-auto">
@@ -141,9 +165,9 @@ useEffect(() => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Performance
+                          Products
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">49,65%</span>
+                        <span className="h2 font-weight-bold mb-0">{products.length}</span>
                       </div>
                       <Col className="col-auto">
                         <div className="icon icon-shape bg-info text-white rounded-circle shadow">

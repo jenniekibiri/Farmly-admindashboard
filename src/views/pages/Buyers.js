@@ -1,4 +1,4 @@
-import React, { useContext, useEffect,useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 // reactstrap components
 import {
@@ -27,11 +27,10 @@ const Buyers = () => {
   const { getBuyers, buyers, deleteBuyer } = useContext(GlobalContext);
   const [loading, setLoading] = useState(false);
 
-
-const fetchData=()=>{
-  setLoading(true);
-  axios
-      .get( `${process.env.REACT_APP_BACKENDAPI}/api/buyers`, {
+  const fetchData = () => {
+    setLoading(true);
+    axios
+      .get(`${process.env.REACT_APP_BACKENDAPI}/api/buyers`, {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
@@ -44,7 +43,7 @@ const fetchData=()=>{
         console.log(error);
         setLoading(false);
       });
-}
+  };
 
   useEffect(() => {
     fetchData();
@@ -53,7 +52,7 @@ const fetchData=()=>{
     e.preventDefault();
 
     axios
-      .delete( `${process.env.REACT_APP_BACKENDAPI}/api/user/${userId}`, {
+      .delete(`${process.env.REACT_APP_BACKENDAPI}/api/user/${userId}`, {
         headers: {},
       })
       .then((response) => {
@@ -100,7 +99,6 @@ const fetchData=()=>{
                     <tr>
                       <th scope="row">
                         <Media className="align-items-center">
-                         
                           <Media>
                             <span className="mb-0 text-sm">
                               {user.firstName} {user.lastName}
